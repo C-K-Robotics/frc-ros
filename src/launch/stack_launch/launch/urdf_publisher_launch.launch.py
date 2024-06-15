@@ -25,7 +25,7 @@ def yaml_decode(yaml_input_path):
             return numeric_inputs, string_inputs
 
 def generate_launch_description():
-    pkg_name = 'basestation_launch'
+    pkg_name = 'stack_launch'
     xacro_file = 'ucsd_racecar.xacro'
     desc_dir = get_package_share_directory(pkg_name)
 

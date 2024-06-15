@@ -10,7 +10,7 @@ import os
 
 def generate_launch_description():
     # print(get_package_share_directory('joy_teleop'))
-    ctrl_pkg = 'basestation_launch'
+    ctrl_pkg = 'stack_launch'
     joy_config = os.path.join(
         get_package_share_directory(ctrl_pkg),
         'param',

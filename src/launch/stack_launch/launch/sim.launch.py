@@ -6,7 +6,7 @@ import os
 import yaml
 
 def generate_launch_description():
-    pkg_name = 'basestation_launch'
+    pkg_name = 'stack_launch'
     desc_dir = get_package_share_directory(pkg_name)
 
     config = os.path.join(
