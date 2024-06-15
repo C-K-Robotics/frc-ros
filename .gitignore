@@ -1,0 +1,28 @@
+src/external/*
+
+build/**
+log/**
+install/**
+
+# Executables
+*.exe
+*.out
+*.app
+
+# macos
+.DS_Store
+
+# py
+*.pyc
+
+#vscode
+.vscode
+.vscode/build
+.vscode/log
+.vscode/c_cpp_properties.json
+
+# ros2 frames
+src/launch/basestation_launch/ros_data/frames/frames.gv
+
+# self_test map data
+src/launch/basestation_launch/ros_data/maps/self_test/*/*
