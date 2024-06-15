@@ -15,5 +15,5 @@ docker run \
     --volume='/dev/input:/dev/input' \
     --volume='/home/jetson/.Xauthority:/root/.Xauthority:rw' \
     --volume='/tmp/.X11-unix/:/tmp/.X11-unix' \
-    --volume='/home/jetson/projects/robocar:/home/jetson/projects/robocar' \
+    --volume='/home/jetson/projects/frc-ros:/home/projects/frc-ros' \
     djnighti/ucsd_robocar:devel
