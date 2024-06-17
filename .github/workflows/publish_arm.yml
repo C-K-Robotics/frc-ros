@@ -1,7 +1,7 @@
 name: publish
 on: 
-  schedule:
-    - cron: '38 23 * * *'
+  # schedule:
+  #   - cron: '38 23 * * *'
   release:
     types: [published]
     branches: [ "main" ]
