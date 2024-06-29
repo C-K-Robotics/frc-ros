@@ -26,3 +26,7 @@ image-update:
 rocker-nvidia:
 	@CONT_NAME="${CONT_NAME}"
 	rocker --network host --nvidia runtime -e NVIDIA_DRIVER_CAPABILITIES=all --git --ssh --x11 --privileged --name ${CONT_NAME} --user --volume ${shell pwd} -- ghcr.io/ucsd-ecemae-148/donkeycontainer:ros
+
+.PHONY: docker-build
+docker-build:
+	DOCKER_BUILDKIT=0 docker build -t frc-ros:test -f .docker_utils/Dockerfile.arm .
