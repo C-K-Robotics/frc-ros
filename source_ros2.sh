@@ -8,7 +8,6 @@ then
   echo "Sources the ROS distribution and workspace at WORKSPACE."
   echo 
   echo "containing the name of the target ROS distribution."
-  echo "Supported distros: foxy"
   return
 fi
 
@@ -24,14 +23,14 @@ export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
 cd ${WORKSPACE}
 source /opt/ros/$ROS_DISTRO/setup.bash
 source install/setup.bash
-source src/external/lidar/install/setup.bash
+# source src/external/lidar/install/setup.bash
 
 function source_ros2()
 {
 	cd ${WORKSPACE}
 	source /opt/ros/$ROS_DISTRO/setup.bash
 	source install/setup.bash
-	source src/external/lidar/install/setup.bash
+	# source src/external/lidar/install/setup.bash
 }
 
 function build_ros2()
