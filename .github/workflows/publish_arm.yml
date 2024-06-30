@@ -16,7 +16,7 @@ env:
   REGISTRY: ghcr.io
   # github.repository as <account>/<repo>
   IMAGE_NAME: ${{ github.repository }}
-  ROS_DISTRO: foxy
+  ROS_DISTRO: humble
 
 jobs:
   build:
