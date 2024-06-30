@@ -10,7 +10,7 @@ FROM dustynv/opencv:4.8.1-r36.2.0
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
-ARG WORKSPACE=/home/projects/frc-ros/
+ARG WORKSPACE=/home/projects/frc_ws/
 ARG ROS_DISTRO=humble
 ARG BRANCH_NAME=main
 
