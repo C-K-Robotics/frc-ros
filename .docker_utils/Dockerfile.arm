@@ -352,6 +352,7 @@ RUN apt-get update && \
     ros-$ROS_DISTRO-nav2* \
     ros-$ROS_DISTRO-navigation2 \
     ros-$ROS_DISTRO-nav2-smac-planner \
+    ros-$ROS_DISTRO-*voxel-layer* \
     ros-$ROS_DISTRO-tf-transformations
 
 # RUN apt-get -y dist-upgrade
