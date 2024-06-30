@@ -351,9 +351,7 @@ RUN apt-get update && \
     ros-$ROS_DISTRO-rosbridge-suite \
     ros-$ROS_DISTRO-nav2* \
     ros-$ROS_DISTRO-navigation2 \
-    ros-$ROS_DISTRO-smac-planner \
-    ros-$ROS_DISTRO-spatio-temporal-voxel-layer \
-    ros-$ROS_DISTRO-nonpersistent-voxel-layer \
+    ros-$ROS_DISTRO-nav2-smac-planner \
     ros-$ROS_DISTRO-tf-transformations
 
 # RUN apt-get -y dist-upgrade
