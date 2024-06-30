@@ -433,6 +433,9 @@ RUN source source_ros2.sh && \
 # RUN source source_ros2.sh && \ 
 #     make livox-driver
 
+## Install WPILIB Robotpy Python
+RUN pip install --extra-index-url=https://wpilib.jfrog.io/artifactory/api/pypi/wpilib-python-release-2024/simple robotpy
+
 ########### ADD CUSTOM FUNCTIONS ###########
 WORKDIR /home/scripts/
 COPY scripts/bashrc.sh ./bashrc.sh
