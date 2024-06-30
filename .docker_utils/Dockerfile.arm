@@ -357,12 +357,12 @@ RUN apt-get update && \
 
 # RUN apt-get -y dist-upgrade
 
-# WORKDIR /home/projects/
-# ####### CREATE VIRTUAL ENVIRONMENTS #######
-# RUN apt install python3.10-venv
-# RUN echo "alias python=python3" >> ~/.bashrc
-# ENV VIRTUAL_ENV=/opt/venv
-# RUN python3 -m venv "${VIRTUAL_ENV}/donkey" --system-site-packages
+WORKDIR /home/projects/
+####### CREATE VIRTUAL ENVIRONMENTS #######
+RUN apt install python3.10-venv
+RUN echo "alias python=python3" >> ~/.bashrc
+ENV VIRTUAL_ENV=/opt/venv
+RUN python3 -m venv "${VIRTUAL_ENV}/donkey" --system-site-packages
 
 # ################ DEPTHAI ##################
 # WORKDIR /home/projects/
@@ -418,20 +418,16 @@ RUN git clone -b $BRANCH_NAME https://github.com/C-K-Robotics/frc-ros.git && \
 #     transforms3d
 
 ########### Clone Basic ROS 2 Packages ###########
-# RUN source source_ros2.sh && \
-#     vcs import < repos/common.repos && \
-#     vcs import < repos/lidar_utils.repos && \
-#     vcs import < repos/racer.repos && \ 
-#     sed -i '/#include <tf2_geometry_msgs/d' src/external/state_estimation/rf2o_laser_odometry/include/rf2o_laser_odometry/CLaserOdometry2DNode.hpp && \
-#     make gb_opt
+RUN source source_ros2.sh && \
+    vcs import < repos/lidar.repos
 
 ### f1tenth gym && ros2 gym bridge ###
 # RUN make sim
 
 # COLCON BUILD ROS2 PACKAGES
-# RUN source source_ros2.sh && \
-#     make rosdep-install && \ 
-#     build_ros2
+RUN source source_ros2.sh && \
+    make rosdep-install && \ 
+    build_ros2
 
 ########### Build livox_sdk2, livox_ros_driver2 ###########
 # RUN source source_ros2.sh && \ 
