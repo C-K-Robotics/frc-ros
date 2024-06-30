@@ -12,7 +12,7 @@ then
   return
 fi
 
-export ROS_DISTRO=foxy
+export ROS_DISTRO=humble
 # sudo apt update && sudo apt upgrade
 sudo apt install ros-$ROS_DISTRO-rmw-cyclonedds-cpp -y
 sudo apt install ros-$ROS_DISTRO-rosbridge-suite -y
