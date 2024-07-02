@@ -5,15 +5,19 @@
 
 import logging
 import time
+import netifaces as ni
 
 import ntcore
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.DEBUG)
 
+    ip = ni.ifaddresses('eth0')[ni.AF_INET][0]['addr']
+    # ip = "169.254.0.12" # PC: 169.254.212.29
+
     # initialize networktables server (on a robot this is already done)
     inst = ntcore.NetworkTableInstance.getDefault()
-    inst.startServer()
+    inst.startServer(listen_address=ip)
 
     # Initialize two subscriptions
     table = inst.getTable("data")
