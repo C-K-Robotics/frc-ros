@@ -10,26 +10,23 @@ from launch_ros.actions import PushRosNamespace
 
 
 def generate_launch_description():
-    sensor_pkg = 'sensors'
-    some_package = 'ldlidar'
-    some_node = 'ldlidar'    
-    some_config = 'ld06.yaml'
+    pkg_name = 'nt_client'
+    some_node = 'nt_client_node'    
+    some_config = 'nt_client.yaml'
 
-    original_topic_name = 'scan'
-    new_topic_name = LaunchConfiguration('topic_name', default=original_topic_name)
-
-    ld = LaunchDescription()
     config = os.path.join(
-        get_package_share_directory(sensor_pkg),
+        get_package_share_directory(pkg_name),
         'param',
         some_config)
         
-    sensor_node=Node(
+    client_node=Node(
         executable=some_node,
-        package=some_package,
+        package=pkg_name,
         output='screen',
         parameters=[config],
-        remappings=[(original_topic_name,new_topic_name)]
     )
-    ld.add_action(sensor_node)
+
+    ld = LaunchDescription()
+    ld.add_action(client_node)
+    
     return ld
