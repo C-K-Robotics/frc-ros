@@ -25,8 +25,8 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            nt_client_pub_node = nt_client.NT_client_pub:main
-            nt_client_sub_node = nt_client.NT_client_sub:main
+            nt_client_pub_node = nt_client.nt_client_pub:main
+            nt_client_sub_node = nt_client.nt_client_sub:main
         ],
     },
 )
