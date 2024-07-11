@@ -29,6 +29,7 @@ if __name__ == "__main__":
     table = inst.getTable("data")
     pub1 = table.getDoubleTopic("1").publish()
     pub2 = table.getDoubleTopic("2").publish()
+    name_pub_ = table.getStringTopic("my name").publish()
 
     i = 3
 
@@ -36,6 +37,7 @@ if __name__ == "__main__":
         # These values are being published fast than the server is polling
         pub1.set(i)
         pub2.set(i + 100)
+        name_pub_.set("Winston")
 
         time.sleep(0.5)
         i += 1
