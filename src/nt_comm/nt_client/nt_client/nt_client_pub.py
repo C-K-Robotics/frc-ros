@@ -12,11 +12,10 @@ import ntcore
 import numpy as np
 
 import rclpy
-from nav2_msgs.action import NavigateToPose
 from rclpy.action import ActionClient
 from rclpy.node import Node
 
-from geometry_msgs.msg import Point, PoseStamped
+from .nt_utils import findROSClass, msg2json, json2msg, nt_type_dict
 
 class NTClientPub(Node):
 
@@ -28,7 +27,7 @@ class NTClientPub(Node):
                 ('NT_server_ip', "10.80.20.2"),
                 ('use_sim_time', False),
                 ('sampling_time', 0.1),
-                ('sub_rostopic_name', []),
+                ('sub_rostopic_names', []),
                 ('msg_types', []),
                 ('pub_NT_names', [])]
         )
@@ -45,12 +44,21 @@ class NTClientPub(Node):
         ip = self.get_parameter('NT_server_ip').value
 
         # Initialize NT4 client
-        inst = ntcore.NetworkTableInstance.getDefault()
+        self.inst = ntcore.NetworkTableInstance.getDefault()
 
         identity = f"{basename(__file__)}-{os.getpid()}"
-        inst.startClient4(identity)
+        self.inst.startClient4(identity)
 
-        inst.setServer(ip)
+        self.inst.setServer(ip)
+
+        self.sub_rostopic_names = self.get_parameter('sub_rostopic_names').value
+        self.msg_types = self.get_parameter('msg_types').value
+        self.pub_NT_names = self.get_parameter('pub_NT_names').value
+
+        self.coerceSizeCheck()
+        self.get_logger().info('NT Publishers Enabled!')
+
+        self.subs, self.nt_types = self.create_subs()
 
         # Start a timer
         self.Ts = self.get_parameter('sampling_time').value
@@ -60,6 +68,29 @@ class NTClientPub(Node):
         
     def periodic(self):
         # TODO: periodic logic
+
+    def create_subs(self):
+        subs = []
+        nt_types = []
+        for rostopic_name in self.sub_rostopic_names:
+            index = self.sub_rostopic_names.index(rostopic_name)
+            msg_type = self.msg_types[index]
+            nt_type = "String"
+
+            msg_type.replace("/", ".")
+            self.msg_types[index] = msg_type
+            subs.append(self.create_publisher(findROSClass(msg_type), self.pub_rostopic_names[index], 10))
+            nt_types.append(nt_type)
+        return subs, nt_types
+
+    def coerceSizeCheck(self):
+        if len(self.sub_rostopic_names) == len(self.msg_types):
+            if len(self.msg_types) == len(self.pub_NT_names):
+                self.get_logger().info('Number of topics Checked!')
+            else:
+                raise Exception("Topic info has unmatched size!!! Please check you yaml file.")
+        else:
+            raise Exception("Topic info has unmatched size!!! Please check you yaml file.")
         
         
 def main(args=None):
