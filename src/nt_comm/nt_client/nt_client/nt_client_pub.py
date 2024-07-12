@@ -15,7 +15,7 @@ import rclpy
 from rclpy.action import ActionClient
 from rclpy.node import Node
 
-from .nt_utils import findROSClass, msg2json, json2msg, nt_type_dict
+from .nt_utils import findROSClass, msg2json, json2msg, nt_type_dict, nt_create_topic, nt_write
 
 class NTClientPub(Node):
 
@@ -58,20 +58,20 @@ class NTClientPub(Node):
         self.coerceSizeCheck()
         self.get_logger().info('NT Publishers Enabled!')
 
-        self.subs, self.nt_types = self.create_subs()
+        self.create_subs()
 
         # Start a timer
         self.Ts = self.get_parameter('sampling_time').value
         self.timer = self.create_timer(self.Ts, self.periodic)
-
-    def msg_cb(self, msg):
         
     def periodic(self):
         # TODO: periodic logic
 
     def create_subs(self):
-        subs = []
-        nt_types = []
+        self.msgs = []
+        self.subs = []
+        self.nt_types = []
+        self.functions = []
         for rostopic_name in self.sub_rostopic_names:
             index = self.sub_rostopic_names.index(rostopic_name)
             msg_type = self.msg_types[index]
@@ -79,9 +79,14 @@ class NTClientPub(Node):
 
             msg_type.replace("/", ".")
             self.msg_types[index] = msg_type
-            subs.append(self.create_publisher(findROSClass(msg_type), self.pub_rostopic_names[index], 10))
-            nt_types.append(nt_type)
-        return subs, nt_types
+            self.functions.append(self.create_a_function(index))
+            self.subs.append(self.create_subscription(findROSClass(msg_type), rostopic_name, self.functions[index], 10))
+            self.nt_types.append(nt_type)
+
+    def create_a_function(self, index):
+        def msg_cb(self, msg, index):
+            self.msgs[index] = msg
+        return msg_cb
 
     def coerceSizeCheck(self):
         if len(self.sub_rostopic_names) == len(self.msg_types):

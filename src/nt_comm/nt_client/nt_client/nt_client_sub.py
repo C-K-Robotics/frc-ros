@@ -58,7 +58,7 @@ class NTClientSub(Node):
         self.coerceSizeCheck()
         self.get_logger().info('NT Subscribers Enabled!')
 
-        self.pubs, self.nt_types = self.create_pubs()
+        self.create_pubs()
 
         # Start a timer
         self.Ts = self.get_parameter('sampling_time').value
@@ -70,8 +70,8 @@ class NTClientSub(Node):
         # TODO: periodic logic
 
     def create_pubs(self):
-        pubs = []
-        nt_types = []
+        self.pubs = []
+        self.nt_types = []
         for NT_name in self.sub_NT_names:
             index = self.sub_NT_names.index(NT_name)
             msg_type = self.msg_types[index]
@@ -82,9 +82,8 @@ class NTClientSub(Node):
 
             msg_type.replace("/", ".")
             self.msg_types[index] = msg_type
-            pubs.append(self.create_publisher(findROSClass(msg_type), self.pub_rostopic_names[index], 10))
-            nt_types.append(nt_type)
-        return pubs, nt_types
+            self.pubs.append(self.create_publisher(findROSClass(msg_type), self.pub_rostopic_names[index], 10))
+            self.nt_types.append(nt_type)
 
     def coerceSizeCheck(self):
         if len(self.sub_NT_names) == len(self.msg_types):
