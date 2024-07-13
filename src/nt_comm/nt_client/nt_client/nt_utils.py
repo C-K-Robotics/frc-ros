@@ -107,14 +107,3 @@ def nt_create_topic(inst:ntcore.NetworkTableInstance, topic_type:str, topic_name
         return table.getStringArrayTopic(name)
     elif topic_type == "String":
         return table.getStringTopic(name)
-
-def nt_read(topic, default_value):
-    sub = topic.subscribe(default_value)
-    value = sub.get()
-    sub.close()
-    return value
-    
-def nt_write(topic, value):
-    pub = topic.publish()
-    value = pub.set(value)
-    pub.close()
