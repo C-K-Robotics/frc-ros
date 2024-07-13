@@ -15,7 +15,7 @@ import rclpy
 from rclpy.action import ActionClient
 from rclpy.node import Node
 
-from .nt_utils import findROSClass, msg2json, json2msg, nt_type_dict, nt_create_topic, nt_default_value
+from .nt_utils import findROSClass, msg2json, json2msg, nt_type_dict, nt_create_topic, nt_default_value, nt2msg
 
 class NTClientSub(Node):
 
@@ -69,10 +69,9 @@ class NTClientSub(Node):
             index = self.nt_subs.index(nt_sub)
             msg_type = self.msg_types[index]
 
-            ### TODO: support direct subscribe to NT
             try:
-                nt_type = nt_type_dict(msg_type)
-                # msg = 
+                nt_type = nt_type_dict(msg_type.replace(".", "/"))
+                msg = nt2msg(nt_sub.get(), msg_type)
             except KeyError:
                 nt_type = "String"
                 # deserialize back to ROS message
