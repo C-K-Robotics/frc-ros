@@ -66,6 +66,7 @@ class NTClientPub(Node):
         
     def periodic(self):
         # TODO: periodic logic
+        print("periodic test")
 
     def create_subs(self):
         self.msgs = []
