@@ -15,7 +15,7 @@ import rclpy
 from rclpy.action import ActionClient
 from rclpy.node import Node
 
-from .nt_utils import findROSClass, msg2json, json2msg, nt_type_dict, nt_create_topic, nt_write
+from .nt_utils import findROSClass, msg2json, json2msg, nt_type_dict, nt_create_topic
 
 class NTClientPub(Node):
 
@@ -59,15 +59,37 @@ class NTClientPub(Node):
 
         self.create_subs()
 
+        # Start a timer
+        self.Ts = self.get_parameter('sampling_time').value
+        self.timer = self.create_timer(self.Ts, self.periodic)
+    
+    def periodic(self):
+        # TODO: periodic logic
+        for msg in self.msgs:
+            index = self.msgs.index(msg)
+            nt_pub = self.nt_pubs[index]
+
+            # serialize msg
+            json_msg, msg_type = msg2json(msg)
+            # self.get_logger().info(f'Serialize msg #{index}!')
+
+            # publish to NetworkTable
+            nt_pub.set(json_msg)
+            # self.get_logger().info(f'Publish msg #{index} to NetworkTable!')
+
     def create_subs(self):
         self.msgs = []
         self.subs = []
         self.nt_types = []
+        self.nt_pubs = []
         self.functions = []
         for rostopic_name in self.sub_rostopic_names:
             index = self.sub_rostopic_names.index(rostopic_name)
             msg_type = self.msg_types[index]
+            nt_name = self.pub_NT_names[index]
+
             nt_type = "String"
+            self.nt_types.append(nt_type)
 
             msg_type = msg_type.replace("/", ".")
             self.msg_types[index] = msg_type
@@ -76,11 +98,14 @@ class NTClientPub(Node):
             var_class = findROSClass(msg_type)
             self.msgs.append(var_class())
             self.subs.append(self.create_subscription(var_class, rostopic_name, self.functions[index], 10))
-            self.nt_types.append(nt_type)
+            
+            # create nt publishers
+            self.nt_pubs.append(nt_create_topic(self.inst, nt_type, nt_name).publish())
 
     def create_a_function(self, index):
         def msg_cb(msg):
             self.msgs[index] = msg
+            # self.get_logger().info(f'msg #{index}: {self.msgs[index]}')
         return msg_cb
 
     def coerceSizeCheck(self):
