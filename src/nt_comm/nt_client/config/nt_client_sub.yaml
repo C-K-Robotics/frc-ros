@@ -1,4 +1,4 @@
-nt_client_sub_node:
+NT_Client_Subscribe_Node:
   ros__parameters:
     NT_server_ip: "10.80.20.2"
     use_sim_time: False
