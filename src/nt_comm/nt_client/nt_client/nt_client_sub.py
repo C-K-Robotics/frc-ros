@@ -15,7 +15,7 @@ import rclpy
 from rclpy.action import ActionClient
 from rclpy.node import Node
 
-from .nt_utils import findROSClass, msg2json, json2msg, nt_type_dict
+from .nt_utils import findROSClass, msg2json, json2msg, nt_type_dict, nt_create_topic, nt_default_value
 
 class NTClientSub(Node):
 
@@ -62,28 +62,51 @@ class NTClientSub(Node):
         # Start a timer
         self.Ts = self.get_parameter('sampling_time').value
         self.timer = self.create_timer(self.Ts, self.periodic)
-
-    def msg_cb(self, msg):
         
     def periodic(self):
         # TODO: periodic logic
-        print("periodic test")
+        for nt_sub in self.nt_subs:
+            index = self.nt_subs.index(nt_sub)
+            msg_type = self.msg_types[index]
+
+            ### TODO: support direct subscribe to NT
+            try:
+                nt_type = nt_type_dict(msg_type)
+                # msg = 
+            except KeyError:
+                nt_type = "String"
+                # deserialize back to ROS message
+                json_msg = nt_sub.get()
+                if json_msg == "":
+                    continue
+                msg = json2msg(json_msg, msg_type)
+            # self.get_logger().info(f'msg #{index}: {msg}')
+            
+            # publish ROS message
+            pub = self.pubs[index]
+            pub.publish(msg)
 
     def create_pubs(self):
+        self.msgs = []
         self.pubs = []
         self.nt_types = []
-        for NT_name in self.sub_NT_names:
-            index = self.sub_NT_names.index(NT_name)
+        self.nt_subs = []
+        for nt_name in self.sub_NT_names:
+            index = self.sub_NT_names.index(nt_name)
             msg_type = self.msg_types[index]
             try:
                 nt_type = nt_type_dict(msg_type)
             except KeyError:
                 nt_type = "String"
+            default_value = nt_default_value(nt_type)
+            self.nt_types.append(nt_type)
 
             msg_type = msg_type.replace("/", ".")
             self.msg_types[index] = msg_type
             self.pubs.append(self.create_publisher(findROSClass(msg_type), self.pub_rostopic_names[index], 10))
-            self.nt_types.append(nt_type)
+
+            # create nt subscribers
+            self.nt_subs.append(nt_create_topic(self.inst, nt_type, nt_name).subscribe(default_value))
 
     def coerceSizeCheck(self):
         if len(self.sub_NT_names) == len(self.msg_types):
