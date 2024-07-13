@@ -11,22 +11,27 @@ from launch_ros.actions import PushRosNamespace
 
 def generate_launch_description():
     pkg_name = 'nt_client'
-    some_node = 'nt_client_node'    
-    some_config = 'nt_client.yaml'
-
-    config = os.path.join(
-        get_package_share_directory(pkg_name),
-        'param',
-        some_config)
         
-    client_node=Node(
-        executable=some_node,
+    pub_node=Node(
+        executable='nt_client_pub_node',
         package=pkg_name,
         output='screen',
-        parameters=[config],
+        parameters=[os.path.join(get_package_share_directory(pkg_name),
+                                 'config',
+                                 'nt_client_pub.yaml')],
+    )
+
+    sub_node=Node(
+        executable='nt_client_sub_node',
+        package=pkg_name,
+        output='screen',
+        parameters=[os.path.join(get_package_share_directory(pkg_name),
+                                 'config',
+                                 'nt_client_sub.yaml')],
     )
 
     ld = LaunchDescription()
-    ld.add_action(client_node)
+    ld.add_action(pub_node)
+    ld.add_action(sub_node)
     
     return ld
