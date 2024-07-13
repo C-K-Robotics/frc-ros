@@ -33,6 +33,20 @@ def json2msg(json_string: str, msg_type: str):
     set_message_fields(restored_msg, json.loads(json_string))
     return restored_msg
 
+def nt2msg(nt_value, msg_type: str):
+    ''' 
+    Convert the NT value directly to desired ROS message
+
+    :param nt_value: the NT value
+    :param msg_type: the type of the ROS message
+    :return: returns with the restored ROS message
+    '''
+    var_class = findROSClass(msg_type)
+    restored_msg = var_class()
+    _dict = {"data": nt_value}
+    set_message_fields(restored_msg, _dict)
+    return restored_msg
+
 def findROSClass(msg_type: str):
     ''' 
     Find the class of the given ROS message type
