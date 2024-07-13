@@ -26,9 +26,9 @@ class NTClientSub(Node):
             parameters=[
                 ('NT_server_ip', "10.80.20.2"),
                 ('sampling_time', 0.1),
-                ('sub_NT_names', []),
-                ('msg_types', []),
-                ('pub_rostopic_names', [])]
+                ('sub_NT_names', [""]),
+                ('msg_types', [""]),
+                ('pub_rostopic_names', [""])]
         )
 
         # self.glb_sp_wpnts = WpntArray()
