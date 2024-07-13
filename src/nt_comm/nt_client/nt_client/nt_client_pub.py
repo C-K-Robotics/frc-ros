@@ -25,7 +25,6 @@ class NTClientPub(Node):
             namespace='',
             parameters=[
                 ('NT_server_ip', "10.80.20.2"),
-                ('use_sim_time', False),
                 ('sampling_time', 0.1),
                 ('sub_rostopic_names', []),
                 ('msg_types', []),
