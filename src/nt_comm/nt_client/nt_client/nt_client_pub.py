@@ -86,12 +86,12 @@ class NTClientPub(Node):
         for rostopic_name in self.sub_rostopic_names:
             index = self.sub_rostopic_names.index(rostopic_name)
             msg_type = self.msg_types[index]
+            msg_type = msg_type.replace("/", ".")
             nt_name = self.pub_NT_names[index]
 
             nt_type = "String"
             self.nt_types.append(nt_type)
 
-            msg_type = msg_type.replace("/", ".")
             self.msg_types[index] = msg_type
             self.functions.append(self.create_a_function(index))
             self.get_logger().info(f'Function #{index} Created!')
