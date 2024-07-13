@@ -107,3 +107,29 @@ def nt_create_topic(inst:ntcore.NetworkTableInstance, topic_type:str, topic_name
         return table.getStringArrayTopic(name)
     elif topic_type == "String":
         return table.getStringTopic(name)
+
+def nt_default_value(topic_type:str):
+    if topic_type == "BooleanArray":
+        return [False]
+    elif topic_type == "Boolean":
+        return False
+
+    elif topic_type == "DoubleArray":
+        return [0.0]
+    elif topic_type == "Double":
+        return 0.0
+
+    elif topic_type == "FloatArray":
+        return [0.0]
+    elif topic_type == "Float":
+        return 0.0
+        
+    elif topic_type == "IntegerArray":
+        return [0]
+    elif topic_type == "Integer":
+        return 0
+    
+    elif topic_type == "StringArray":
+        return [""]
+    elif topic_type == "String":
+        return ""
