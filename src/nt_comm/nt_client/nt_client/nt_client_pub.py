@@ -26,9 +26,9 @@ class NTClientPub(Node):
             parameters=[
                 ('NT_server_ip', "10.80.20.2"),
                 ('sampling_time', 0.1),
-                ('sub_rostopic_names', []),
-                ('msg_types', []),
-                ('pub_NT_names', [])]
+                ('sub_rostopic_names', [""]),
+                ('msg_types', [""]),
+                ('pub_NT_names', [""])]
         )
 
         # self.glb_sp_wpnts = WpntArray()
@@ -59,14 +59,6 @@ class NTClientPub(Node):
 
         self.create_subs()
 
-        # Start a timer
-        self.Ts = self.get_parameter('sampling_time').value
-        self.timer = self.create_timer(self.Ts, self.periodic)
-        
-    def periodic(self):
-        # TODO: periodic logic
-        print("periodic test")
-
     def create_subs(self):
         self.msgs = []
         self.subs = []
@@ -77,14 +69,17 @@ class NTClientPub(Node):
             msg_type = self.msg_types[index]
             nt_type = "String"
 
-            msg_type.replace("/", ".")
+            msg_type = msg_type.replace("/", ".")
             self.msg_types[index] = msg_type
             self.functions.append(self.create_a_function(index))
-            self.subs.append(self.create_subscription(findROSClass(msg_type), rostopic_name, self.functions[index], 10))
+            self.get_logger().info(f'Function #{index} Created!')
+            var_class = findROSClass(msg_type)
+            self.msgs.append(var_class())
+            self.subs.append(self.create_subscription(var_class, rostopic_name, self.functions[index], 10))
             self.nt_types.append(nt_type)
 
     def create_a_function(self, index):
-        def msg_cb(self, msg, index):
+        def msg_cb(msg):
             self.msgs[index] = msg
         return msg_cb
 

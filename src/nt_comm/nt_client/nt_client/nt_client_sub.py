@@ -80,7 +80,7 @@ class NTClientSub(Node):
             except KeyError:
                 nt_type = "String"
 
-            msg_type.replace("/", ".")
+            msg_type = msg_type.replace("/", ".")
             self.msg_types[index] = msg_type
             self.pubs.append(self.create_publisher(findROSClass(msg_type), self.pub_rostopic_names[index], 10))
             self.nt_types.append(nt_type)
