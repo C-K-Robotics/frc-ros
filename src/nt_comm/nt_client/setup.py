@@ -2,7 +2,7 @@ from setuptools import setup
 import os
 from glob import glob
 
-package_name = 'nt_client'
+package_name = 'networktable_bridge'
 
 setup(
     name=package_name,
@@ -14,7 +14,6 @@ setup(
         ('share/' + package_name, ['package.xml']),
         (os.path.join('share', package_name, 'launch'), glob('launch/*launch.py')),
         (os.path.join('share', package_name, 'config'), glob('config/*.yaml')),
-        (os.path.join('share', package_name, 'livox_config'), glob('livox_config/*')),
     ],
     install_requires=['setuptools'],
     zip_safe=True,
@@ -25,8 +24,8 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'nt_client_pub_node = nt_client.nt_client_pub:main',
-            'nt_client_sub_node = nt_client.nt_client_sub:main',
+            'nt_client_pub_node = networktable_bridge.nt_client_pub:main',
+            'nt_client_sub_node = networktable_bridge.nt_client_sub:main',
         ],
     },
 )

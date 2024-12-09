@@ -1,1 +1,1 @@
-# nt_client package explanation
+# networktable_bridge package explanation
