@@ -74,4 +74,4 @@ tf2::Quaternion TransformHelper::quaternion_from_heading(const double & yaw)
   q.setRPY(0.0, 0.0, yaw);
   return q;
 }
-}  // namespace ckrobotics
+}  // namespace CKR
