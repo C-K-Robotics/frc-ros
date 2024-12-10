@@ -1,0 +1,23 @@
+session_name: Car Core Launch
+windows:
+  - window_name: Car Tools Launch
+    layout: tiled
+    panes:
+    - shell_command:
+      - source install/setup.bash
+      - ros2 launch tools_launch tools.launch.py
+    - shell_command:
+      - source install/setup.bash
+      - ros2 run zenoh_bridge_ros2dds zenoh_bridge_ros2dds -c tools/zenoh_configs/iac_car/dspace.json5
+  - window_name: Car Autonomy Launch
+    layout: tiled
+    panes:
+    - shell_command:
+      - source install/setup.bash
+      - ros2 launch autonomy_launch autonomy_all.launch.py
+  #- window_name: Foxglove Bridge
+  #  layout: tiled
+  #  panes:
+  #  - shell_command:
+  #    - source install/setup.bash
+  #    - ros2 launch foxglove_bridge foxglove_bridge_launch.xml

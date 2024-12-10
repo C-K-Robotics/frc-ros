@@ -1,0 +1,118 @@
+session_name: IAC Car Launch
+windows:
+  - window_name: IAC Car Core Low Level Launch
+    layout: tiled
+    panes:
+    - shell_command:
+      - source install/setup.bash
+      - ros2 launch iac_launch raptor.launch.py
+    - shell_command:
+      - source install/setup.bash
+      - ros2 launch iac_launch motec_socketcan.launch.py
+    - shell_command:
+      - source install/setup.bash
+      - ros2 launch iac_launch dce_ttpms_socketcan.launch.py
+    - shell_command:
+      - source install/setup.bash
+      - ros2 launch iac_launch fort_robotics.launch.py
+    - shell_command:
+      - source install/setup.bash
+      - ros2 launch iac_launch iac_unofficial_can.launch.py
+    - shell_command:
+      - source install/setup.bash
+      - ros2 launch iac_launch kistler.launch.py
+  - window_name: IAC GPS launch
+    layout: tiled
+    panes:
+    - shell_command:
+      - source install/setup.bash
+      - ros2 launch iac_launch oem7_net_top.launch.py
+    - shell_command:
+      - source install/setup.bash
+      - ros2 launch iac_launch oem7_net_bottom.launch.py
+    - shell_command:
+      - source install/setup.bash
+      - ros2 launch iac_launch vectornav.launch.py
+  - window_name: IAC Atlas launch
+    layout: tiled
+    panes:
+    - shell_command:
+      - source install/setup.bash
+      - ros2 launch iac_launch atlas_back.launch.py
+    - shell_command:
+      - source install/setup.bash
+      - ros2 launch iac_launch atlas_front.launch.py
+  - window_name: IAC Car Perception Sensors Launch
+    layout: tiled
+    panes:
+    - shell_command:
+      - source install/setup.bash
+      - ros2 launch iac_launch vimba.launch.py
+    - shell_command:
+      - source install/setup.bash
+      - ros2 run ros2_iris_driver iris_ros_driver
+    - shell_command:
+      - source install/setup.bash
+      - ros2 run ros2_ars540_driver ars548_process_node --ros-args -p interface:=enp14s0 -r __node:=radar_front -r __ns:=/radar_front -p frame_id:=radar_front
+    - shell_command:
+      - source install/setup.bash
+      - ros2 run ros2_ars540_driver ars548_process_node --ros-args -p interface:=enp15s0 -r __node:=radar_rear -r __ns:=/radar_rear -p frame_id:=radar_rear
+  - window_name: CAN Logging
+    layout: tiled
+    panes:
+      - shell_command:
+        - cd /mnt/dsu0
+        - candump -L can0 > raptor.log
+      - shell_command:
+        - cd /mnt/dsu0
+        - candump -L can1 > motec.log
+      - shell_command:
+        - cd /mnt/dsu0
+        - candump -L can2 > dce_ttpms.log
+      - shell_command:
+        - cd /mnt/dsu0
+        - candump -L can3 > fort.log
+      - shell_command:
+        - cd /mnt/dsu0
+        - candump -L can4 > art_can.log
+  - window_name: PCAP Logging
+    layout: tiled
+    panes:
+      - shell_command:
+        - cd /mnt/dsu0
+        - sudo tcpdump -ni lidarbridge -vw lidar_bridge.pcap
+      - shell_command:
+        - cd /mnt/dsu0
+        - sudo tcpdump -ni enp14s0 -vw front_radar.pcap
+      - shell_command:
+        - cd /mnt/dsu0
+        - sudo tcpdump -ni enp15s0 -vw rear_radar.pcap
+      - shell_command:
+        - cd /mnt/dsu0
+        - sudo tcpdump -ni gpsltebridge -vw ins.pcap
+      - shell_command:
+        - cd /mnt/dsu0
+        - sudo tcpdump -ni eno8 -vw cameras.pcap
+  - window_name: Extra Shells
+    layout: tiled
+    panes:
+    - shell_command:
+      - source install/setup.bash
+    - shell_command:
+      - source install/setup.bash
+    - shell_command:
+      - source install/setup.bash
+    - shell_command:
+      - source install/setup.bash
+  - window_name: Car Core Launch
+    layout: tiled
+    panes:
+    - shell_command:
+      - tmuxp load -a tools/tmux_configs/car.yaml
+      - source install/setup.bash
+  - window_name: Car Recording
+    layout: tiled
+    panes:
+    - shell_command:
+      - source install/setup.bash
+      - cd /mnt/dsu0

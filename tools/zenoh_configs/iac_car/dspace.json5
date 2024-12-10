@@ -1,0 +1,36 @@
+{
+  plugins: {
+    ros2dds: {
+      nodename: "dspace_bs_zenoh_bridge",
+      ros_localhost_only: true,
+      allow: {
+        publishers: ["/art_telemetry/telemetry", "/vehicle/engine_report", "/rde/input_manual_command", "/vehicle_state", "/vehicle_actuation", "/mpc_telemetry", "/tf", "/mpc_visualization", "/right_boundary_polygon", "/left_boundary_polygon", "/abscissa_polygon", "/novatel_top/heading2", "/novatel_bottom/heading2", "/sol_in", "/sol_out", "/tracked_objects", "/objects", "/raptor_dbw_interface/steering_report"],
+        subscribers: ["/joystick/control_command2"],
+        service_clients: [],
+        service_servers: ["/race_decision_engine_node/get_parameters", "/race_decision_engine_node/set_parameters", "/vehicle/ct_manager_node/get_parameters", "/vehicle/ct_manager_node/set_parameters", "/basestation_race_control_node/get_parameters", "/basestation_race_control_node/set_parameters", "/ghost_car_node/set_parameters", "/ghost_car_node/get_parameters"],
+        action_servers: [],
+        action_clients: [],
+      },
+      pub_max_frequencies: ["/art_telemetry/telemetry=400.0", "/vehicle/engine_report=1.0", "/rde/input_manual_command=1.0", "/raptor_dbw_interface/steering_report=100"]
+    },
+  },
+  mode: "peer",
+  connect: {
+    endpoints: [
+        "tcp/100.79.168.144:7441"
+    ]
+  },
+  listen: {
+    endpoints: [
+        "tcp/100.70.220.37:7441",
+    ]
+  },
+  scouting: {
+    multicast: {
+        enabled: false,
+    },
+    gossip: {
+        enabled: false,
+    },
+  },
+}

@@ -1,0 +1,22 @@
+session_name: LGSVL Launch
+windows:
+  - window_name: LGSVL Launch
+    layout: tiled
+    panes:
+      - shell_command:
+        - cd /opt/race_common
+        - source install/setup.bash
+        - lgsvl_bridge --port 9091
+      - shell_command:
+        - cd /opt/race_common
+        - source install/setup.bash
+        - python3 tools/dummy_joy_command.py
+      - shell_command:
+        - cd /opt/race_common
+        - source install/setup.bash
+        - ros2 launch svl_launch svl_all.launch.py
+      - shell_command:
+        - sleep 10
+        - cd /opt/race_common
+        - source install/setup.bash
+        - bash tools/scripts/autonomous_params.sh

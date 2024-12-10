@@ -1,0 +1,19 @@
+ARG BASE_IMAGE
+
+FROM $BASE_IMAGE as art_image_built
+
+LABEL maintainer="Siddharth Saha <sisahawork@gmail.com>"
+SHELL ["/bin/bash", "-o", "pipefail", "-ic"]
+
+COPY build/ /opt/race_common/build
+COPY install/ /opt/race_common/install
+COPY example.env /opt/race_common/race.env
+COPY tools/ /opt/race_common/tools
+
+RUN echo "source /opt/race_common/install/setup.bash" >> /etc/bash.bashrc
+
+FROM art_image_built as art_image_built_svl
+
+EXPOSE 8181 9091
+
+CMD ["/bin/bash", "-ic", "tmuxp load /opt/race_common/tools/tmux_configs/svl_iac_docker.yaml"]

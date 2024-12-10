@@ -1,0 +1,8 @@
+session_name: IAC Car Launch
+windows:
+  - window_name: IAC Car Perception Stack
+    layout: tiled
+    panes:
+    - shell_command:
+      - source install/setup.bash
+      - ros2 launch yolov8 yolov8.launch.py

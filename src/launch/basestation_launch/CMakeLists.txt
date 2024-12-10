@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.5)
-project(stack_launch)
+project(basestation_launch)
 
 # Default to C99
 if(NOT CMAKE_C_STANDARD)

@@ -1,0 +1,35 @@
+session_name: IAC Car Launch
+windows:
+  - window_name: Autonoma launch
+    layout: tiled
+    panes:
+    - shell_command:
+      - source install/setup.bash
+      - ros2 launch autonoma_launch raptor.launch.py
+    - shell_command:
+      - source install/setup.bash
+      - ros2 launch autonoma_launch oem7_net_top.launch.py
+    - shell_command:
+      - source install/setup.bash
+      - ros2 launch autonoma_launch oem7_net_bottom.launch.py
+    - shell_command:
+      - source install/setup.bash
+      - ros2 topic pub /raptor_dbw_interface/diagnostic_report raptor_dbw_msgs/msg/DiagnosticReport -r 100.0
+  - window_name: Basestation dummy
+    layout: tiled
+    panes:
+    - shell_command:
+      - source install/setup.bash
+      - ros2 launch basestation_launch basestation.launch.py
+  - window_name: Car Core Launch
+    layout: tiled
+    panes:
+    - shell_command:
+      - tmuxp load -a tools/tmux_configs/car.yaml
+      - source install/setup.bash
+  - window_name: Viz
+    layout: tiled
+    panes:
+    - shell_command:
+      - source install/setup.bash
+      - rviz2 -d src/common/race_metadata/rviz/autonomy.rviz

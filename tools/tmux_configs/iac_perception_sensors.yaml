@@ -1,0 +1,25 @@
+session_name: IAC Car Launch
+windows:
+  - window_name: IAC Car Perception Sensors Launch
+    layout: tiled
+    panes:
+    - shell_command:
+    # Camera drivers
+      - source install/setup.bash
+      - ros2 launch iac_launch vimba.launch.py
+    # LiDAR drivers
+    - shell_command:
+      - source install/setup.bash
+      - ros2 run ros2_iris_driver iris_ros_driver
+    # Front Radar Driver
+    - shell_command:
+      - source install/setup.bash
+      - ros2 run ros2_ars540_driver ars548_process_node --ros-args -p interface:=enp14s0 -r __node:=radar_front -r __ns:=/radar_front -p frame_id:=radar_front
+    # Rear Radar Driver
+    - shell_command:
+      - source install/setup.bash
+      - ros2 run ros2_ars540_driver ars548_process_node --ros-args -p interface:=enp15s0 -r __node:=radar_rear -r __ns:=/radar_rear -p frame_id:=radar_rear
+    # Autonomy Launch
+    - shell_command:
+      - source install/setup.bash
+      - ros2 launch autonomy_launch misc.launch.py

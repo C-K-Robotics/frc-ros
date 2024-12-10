@@ -1,0 +1,19 @@
+session_name: Basestation Launch
+windows:
+  - window_name: Basestation Launch
+    layout: tiled
+    panes:
+    - shell_command:
+      - source install/setup.bash
+      - ros2 launch basestation_launch basestation.launch.py
+    - shell_command:
+      - source install/setup.bash
+      - ros2 run zenoh_bridge_ros2dds zenoh_bridge_ros2dds -c tools/zenoh_configs/iac_car/basestation.json5
+    - shell_command:
+      - source install/setup.bash
+      - ros2 launch foxglove_bridge foxglove_bridge_launch.xml
+  - window_name: SSH Terminal
+    layout: tiled
+    panes:
+    - shell_command:
+      - ssh ${AV_USER_NAME}@${AV_IP}

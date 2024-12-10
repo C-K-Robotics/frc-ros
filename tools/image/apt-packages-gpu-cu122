@@ -1,0 +1,22 @@
+#CUDNN
+libcudnn8=8.9.7.29-1+cuda12.2
+libcudnn8-dev=8.9.7.29-1+cuda12.2
+
+# TensorRT
+tensorrt=8.6.1.6-1+cuda12.0
+libnvinfer8=8.6.1.6-1+cuda12.0
+libnvinfer-dev=8.6.1.6-1+cuda12.0
+libnvinfer-plugin8=8.6.1.6-1+cuda12.0
+libnvinfer-plugin-dev=8.6.1.6-1+cuda12.0
+libnvinfer-lean8=8.6.1.6-1+cuda12.0
+libnvinfer-dispatch8=8.6.1.6-1+cuda12.0
+libnvinfer-bin=8.6.1.6-1+cuda12.0
+libnvinfer-lean-dev=8.6.1.6-1+cuda12.0
+libnvinfer-vc-plugin-dev=8.6.1.6-1+cuda12.0
+libnvinfer-dispatch-dev=8.6.1.6-1+cuda12.0
+libnvinfer-samples=8.6.1.6-1+cuda12.0
+libnvonnxparsers8=8.6.1.6-1+cuda12.0
+libnvonnxparsers-dev=8.6.1.6-1+cuda12.0
+libnvparsers8=8.6.1.6-1+cuda12.0
+libnvparsers-dev=8.6.1.6-1+cuda12.0
+python3-libnvinfer=8.6.1.6-1+cuda12.0
