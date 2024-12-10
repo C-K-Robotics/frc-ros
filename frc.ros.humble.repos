@@ -1,0 +1,23 @@
+repositories:
+    # Utilities
+    src/external/interfaces/image_pipeline:
+        type: git
+        url: git@github.com:ros-perception/image_pipeline.git
+        version: humble
+    src/external/utils/message_filters:
+        type: git
+        url: git@github.com:ros2/message_filters.git
+        version: humble
+    src/external/utils/vision_opencv:
+        type: git
+        url: git@github.com:ros-perception/vision_opencv.git
+        version: humble
+    # BehaviorTree
+    src/external/behaviortree/behaviortree:
+        type: git
+        url: git@github.com:BehaviorTree/BehaviorTree.CPP.git
+        version: master
+    src/external/behaviortree/groot:
+        type: git
+        url: git@github.com:BehaviorTree/Groot.git
+        version: master
