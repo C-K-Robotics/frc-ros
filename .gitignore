@@ -1,8 +1,5 @@
-# ros2 frames
-src/launch/basestation_launch/ros_data/frames/frames.gv
-
 # self_test map data
-src/launch/basestation_launch/ros_data/maps/self_test/*/*
+src/common/common_metadata/ros_data/maps/self_test/*/*
 
 # big binary file
 core
