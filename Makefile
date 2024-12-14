@@ -446,6 +446,7 @@ session:
 			--volume='/dev/input:/dev/input' \
 			--volume='${HOME}.Xauthority:/root/.Xauthority:rw' \
 			--volume='/tmp/.X11-unix/:/tmp/.X11-unix' \
+			--volume='${PWD}:/opt/frc-ros' \
 			${IMG_NAME}
 	else
 		xhost +
@@ -462,6 +463,7 @@ session:
 			--volume='/dev/input:/dev/input' \
 			--volume='${HOME}.Xauthority:/root/.Xauthority:rw' \
 			--volume='/tmp/.X11-unix/:/tmp/.X11-unix' \
+			--volume='${PWD}:/opt/frc-ros' \
 			${IMG_NAME}
 	fi
 
