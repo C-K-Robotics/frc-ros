@@ -21,3 +21,8 @@ repositories:
         type: git
         url: git@github.com:BehaviorTree/Groot.git
         version: master
+    # NetworkTable Bridge
+    src/external/interfaces/networktable_bridge:
+        type: git
+        url: git@github.com:C-K-Robotics/networktable_bridge.git
+        version: main
