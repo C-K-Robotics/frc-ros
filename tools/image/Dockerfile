@@ -22,18 +22,18 @@ RUN apt update && DEBIAN_FRONTEND=noninteractive apt -y install --no-install-rec
   && apt clean \
   && rm -rf /var/lib/apt/lists/*
 
-COPY tools/image/${APT_FILE} /art_tmp/${APT_FILE}
+COPY tools/image/${APT_FILE} /frc_tmp/${APT_FILE}
 
 RUN apt update && DEBIAN_FRONTEND=noninteractive apt -y install --no-install-recommends \
-        $(cat /art_tmp/${APT_FILE} | cut -d# -f1) && \
+        $(cat /frc_tmp/${APT_FILE} | cut -d# -f1) && \
     apt clean && \
-    rm -rf /var/lib/apt/lists/* /art_tmp/${APT_FILE}
+    rm -rf /var/lib/apt/lists/* /frc_tmp/${APT_FILE}
 
-COPY tools/image/${APT_GPU_FILE} /art_tmp/${APT_GPU_FILE}
+COPY tools/image/${APT_GPU_FILE} /frc_tmp/${APT_GPU_FILE}
 RUN apt update && DEBIAN_FRONTEND=noninteractive apt -y install --no-install-recommends \
-        $(cat /art_tmp/${APT_GPU_FILE} | cut -d# -f1) && \
+        $(cat /frc_tmp/${APT_GPU_FILE} | cut -d# -f1) && \
     apt clean && \
-    rm -rf /var/lib/apt/lists/* /art_tmp/${APT_GPU_FILE}
+    rm -rf /var/lib/apt/lists/* /frc_tmp/${APT_GPU_FILE}
 
 ## Add GitHub to known hosts for private repositories
 RUN mkdir -p ~/.ssh \
@@ -42,26 +42,26 @@ RUN mkdir -p ~/.ssh \
 
 RUN python3 -m pip install --upgrade pip
 
-COPY tools/image/${PIP_FILE} /art_tmp/${PIP_FILE}
-RUN DEBIAN_FRONTEND=noninteractive pip3 install -U --no-cache --ignore-installed -r /art_tmp/${PIP_FILE} && \
-    rm -rf /art_tmp/${PIP_FILE}
+COPY tools/image/${PIP_FILE} /frc_tmp/${PIP_FILE}
+RUN DEBIAN_FRONTEND=noninteractive pip3 install -U --no-cache --ignore-installed -r /frc_tmp/${PIP_FILE} && \
+    rm -rf /frc_tmp/${PIP_FILE}
 
-COPY tools/image/${PIP_GPU_FILE} /art_tmp/${PIP_GPU_FILE}
-RUN DEBIAN_FRONTEND=noninteractive pip3 install -U --no-cache --ignore-installed -r /art_tmp/${PIP_GPU_FILE} && \
-    rm -rf /art_tmp/${PIP_GPU_FILE}
+COPY tools/image/${PIP_GPU_FILE} /frc_tmp/${PIP_GPU_FILE}
+RUN DEBIAN_FRONTEND=noninteractive pip3 install -U --no-cache --ignore-installed -r /frc_tmp/${PIP_GPU_FILE} && \
+    rm -rf /frc_tmp/${PIP_GPU_FILE}
 
-COPY tools/image/${PYTORCH_FILE} /art_tmp/${PYTORCH_FILE}
-RUN DEBIAN_FRONTEND=noninteractive pip3 install -U --no-cache --ignore-installed -r /art_tmp/${PYTORCH_FILE} && \
-    rm -rf /art_tmp/${PYTORCH_FILE}
+COPY tools/image/${PYTORCH_FILE} /frc_tmp/${PYTORCH_FILE}
+RUN DEBIAN_FRONTEND=noninteractive pip3 install -U --no-cache --ignore-installed -r /frc_tmp/${PYTORCH_FILE} && \
+    rm -rf /frc_tmp/${PYTORCH_FILE}
 
-RUN rm -rf /art_tmp
+RUN rm -rf /frc_tmp
 
 FROM base as base_custom
 
-COPY tools/image/${CUSTOM_INSTALL_FILE} /art_tmp/${CUSTOM_INSTALL_FILE}
+COPY tools/image/${CUSTOM_INSTALL_FILE} /frc_tmp/${CUSTOM_INSTALL_FILE}
 RUN --mount=type=ssh \
-    DEBIAN_FRONTEND=noninteractive /bin/sh /art_tmp/${CUSTOM_INSTALL_FILE} && \
-    rm -rf /art_tmp/${CUSTOM_INSTALL_FILE}
+    DEBIAN_FRONTEND=noninteractive /bin/sh /frc_tmp/${CUSTOM_INSTALL_FILE} && \
+    rm -rf /frc_tmp/${CUSTOM_INSTALL_FILE}
 
 FROM base_custom as base_ros
 
@@ -69,11 +69,11 @@ ARG ROS_DISTRO
 ARG ROS_INSTALL
 
 # Install Ros Distro
-COPY tools/image/${ROS_INSTALL} /art_tmp/${ROS_INSTALL}
-RUN DEBIAN_FRONTEND=noninteractive /bin/bash /art_tmp/${ROS_INSTALL} ${ROS_DISTRO} && \
-    rm -rf /art_tmp/${ROS_INSTALL}
+COPY tools/image/${ROS_INSTALL} /frc_tmp/${ROS_INSTALL}
+RUN DEBIAN_FRONTEND=noninteractive /bin/bash /frc_tmp/${ROS_INSTALL} ${ROS_DISTRO} && \
+    rm -rf /frc_tmp/${ROS_INSTALL}
 
-FROM base_ros as art_ros_deps_generator
+FROM base_ros as frc_ros_deps_generator
 
 ARG ROS_DISTRO
 ARG ROS_SOURCE
@@ -95,11 +95,11 @@ RUN --mount=type=ssh \
     cd / && \
     rm -rf /workspace
 
-FROM base_ros as art_ros_deps
+FROM base_ros as frc_ros_deps
 
 ARG ROS_DISTRO
 
-COPY --from=art_ros_deps_generator /ros-deps .
+COPY --from=frc_ros_deps_generator /ros-deps .
 
 RUN cat /ros-deps
 
@@ -109,39 +109,39 @@ RUN apt update && \
     apt clean && \
     rm -rf /var/lib/apt/lists/* /ros-deps
 
-FROM art_ros_deps as art_image
+FROM frc_ros_deps as frc_image
 
 ARG ROS_DISTRO
 ARG ROS_SOURCE
 ARG EXPORTS_SCRIPT
 ARG EXPORTS_GPU_SCRIPT
 
-COPY tools/image/${EXPORTS_SCRIPT} /art_tmp/${EXPORTS_SCRIPT}
-COPY tools/image/${EXPORTS_GPU_SCRIPT} /art_tmp/${EXPORTS_GPU_SCRIPT}
-RUN  cd /art_tmp && \
+COPY tools/image/${EXPORTS_SCRIPT} /frc_tmp/${EXPORTS_SCRIPT}
+COPY tools/image/${EXPORTS_GPU_SCRIPT} /frc_tmp/${EXPORTS_GPU_SCRIPT}
+RUN  cd /frc_tmp && \
     ./${EXPORTS_GPU_SCRIPT} && \
     ./${EXPORTS_SCRIPT} && \
-    rm -rf /art_tmp/
+    rm -rf /frc_tmp/
 
 COPY tools/image/cyclonedds.xml /etc/cyclone/cyclonedds.xml
 
 ENV ROS_DISTRO=${ROS_DISTRO}
 
-FROM art_image as art_image_built
+FROM frc_image as frc_image_built
 
 ARG VCS_IMPORTS_SCRIPT
 ARG RC_BUILD_TARGET
 ARG ROS_SOURCE
 
-COPY src/ /opt/race_common/src
-COPY *.repos /opt/race_common
-COPY tools/ /opt/race_common/tools
-COPY Makefile /opt/race_common/Makefile
+COPY src/ /opt/frc-ros/src
+COPY *.repos /opt/frc-ros
+COPY tools/ /opt/frc-ros/tools
+COPY Makefile /opt/frc-ros/Makefile
 
 RUN --mount=type=ssh \
-    --mount=type=cache,target=/opt/race_common/build \
+    --mount=type=cache,target=/opt/frc-ros/build \
     source /opt/ros/${ROS_SOURCE}/setup.bash && \
-    cd /opt/race_common && \
+    cd /opt/frc-ros && \
     rm -rf src/external && \
     DEBIAN_FRONTEND=noninteractive ./tools/image/${VCS_IMPORTS_SCRIPT} && \
     export PATH="/opt/cmake-install/bin:${PATH}" && \
@@ -150,7 +150,7 @@ RUN --mount=type=ssh \
     DEBIAN_FRONTEND=noninteractive make ${RC_BUILD_TARGET} && \
     rm -rf src
 
-RUN echo "source /opt/race_common/install/setup.bash" >> /etc/bash.bashrc
+RUN echo "source /opt/frc-ros/install/setup.bash" >> /etc/bash.bashrc
 
 CMD ["/bin/bash", "-l", "-c", "exec /bin/bash"]
 

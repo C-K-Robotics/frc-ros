@@ -112,7 +112,7 @@ build-docker-cpu-humble:
 	DOCKER_BUILDKIT=1 docker build \
 		--network=host \
 		-f tools/image/Dockerfile \
-		--target art_image \
+		--target frc_image \
 		--ssh default=${SSH_AUTH_SOCK} \
 		--build-arg BASE_IMAGE=ubuntu:22.04 \
 		--build-arg ROS_DISTRO=humble \
@@ -143,7 +143,7 @@ build-docker-cpu-humble-jetpack6:
 	DOCKER_BUILDKIT=1 docker build \
 		--network=host \
 		-f tools/image/Dockerfile \
-		--target art_image_built \
+		--target frc_image_built \
 		--ssh default=${SSH_AUTH_SOCK} \
 		--build-arg BASE_IMAGE=nvcr.io/nvidia/l4t-jetpack:r36.2.0 \
 		--build-arg ROS_DISTRO=humble \
@@ -175,7 +175,7 @@ build-docker-gpu-humble-jetpack5:
 	DOCKER_BUILDKIT=1 docker build \
 		--network=host \
 		-f tools/image/Dockerfile \
-		--target art_image \
+		--target frc_image \
 		--ssh default=${SSH_AUTH_SOCK} \
 		--build-arg BASE_IMAGE=dustynv/ros:humble-pytorch-l4t-r35.3.1 \
 		--build-arg ROS_DISTRO=humble \
@@ -206,7 +206,7 @@ build-docker-cu122-humble:
 	DOCKER_BUILDKIT=1 docker build \
 		--network=host \
 		-f tools/image/Dockerfile \
-		--target art_image \
+		--target frc_image \
 		--ssh default=${SSH_AUTH_SOCK} \
 		--build-arg BASE_IMAGE=nvidia/cuda:12.2.2-devel-ubuntu22.04 \
 		--build-arg ROS_DISTRO=humble \
@@ -237,7 +237,7 @@ build-docker-cu118-humble:
 	DOCKER_BUILDKIT=1 docker build \
 		--network=host \
 		-f tools/image/Dockerfile \
-		--target art_image \
+		--target frc_image \
 		--ssh default=${SSH_AUTH_SOCK} \
 		--build-arg BASE_IMAGE=nvidia/cuda:11.8.0-devel-ubuntu22.04 \
 		--build-arg ROS_DISTRO=humble \
@@ -268,7 +268,7 @@ build-docker-cu122-humble:
 	DOCKER_BUILDKIT=1 docker build \
 		--network=host \
 		-f tools/image/Dockerfile \
-		--target art_image \
+		--target frc_image \
 		--ssh default=${SSH_AUTH_SOCK} \
 		--build-arg BASE_IMAGE=nvidia/cuda:12.2.2-devel-ubuntu22.04 \
 		--build-arg ROS_DISTRO=humble \
