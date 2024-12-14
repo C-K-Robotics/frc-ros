@@ -32,3 +32,6 @@ tmuxp
 # Reformatting
 autoflake
 black
+
+# robotpy
+robotpy
