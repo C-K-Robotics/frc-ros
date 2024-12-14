@@ -1,19 +1,19 @@
 ARG BASE_IMAGE
 
-FROM $BASE_IMAGE as art_image_built
+FROM $BASE_IMAGE as frc_image_built
 
 LABEL maintainer="Winston Chou <winston.h.chou@gmail.com>"
 SHELL ["/bin/bash", "-o", "pipefail", "-ic"]
 
-COPY build/ /opt/race_common/build
-COPY install/ /opt/race_common/install
-COPY example.env /opt/race_common/race.env
-COPY tools/ /opt/race_common/tools
+COPY build/ /opt/frc-ros/build
+COPY install/ /opt/frc-ros/install
+COPY example.env /opt/frc-ros/race.env
+COPY tools/ /opt/frc-ros/tools
 
-RUN echo "source /opt/race_common/install/setup.bash" >> /etc/bash.bashrc
+RUN echo "source /opt/frc-ros/install/setup.bash" >> /etc/bash.bashrc
 
-FROM art_image_built as art_image_built_svl
+FROM frc_image_built as frc_image_built_svl
 
 EXPOSE 8181 9091
 
-CMD ["/bin/bash", "-ic", "tmuxp load /opt/race_common/tools/tmux_configs/svl_iac_docker.yaml"]
+CMD ["/bin/bash", "-ic", "tmuxp load /opt/frc-ros/tools/tmux_configs/svl_iac_docker.yaml"]
