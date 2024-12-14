@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.8)
-project(race_metadata)
+project(common_metadata)
 
 # Default to C++17.
 if(NOT CMAKE_CXX_STANDARD)
@@ -23,8 +23,7 @@ endif()
 
 # Create & install ament package.
 ament_auto_package(INSTALL_TO_SHARE
-  ttls
+  maps
   urdf
   rviz
-  geo_fences
 )

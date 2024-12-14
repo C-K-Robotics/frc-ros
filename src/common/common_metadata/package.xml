@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
-  <name>race_metadata</name>
+  <name>common_metadata</name>
   <version>1.0.0</version>
-  <description>ROS2 package containing ART metadata for vehicles</description>
-  <maintainer email="sisahawork@gmail.com">Siddharth Saha</maintainer>
+  <description>ROS2 package containing metadata for FRC-ROS</description>
+  <maintainer email="winston.h.chou@gmail.com">Winston Chou</maintainer>
   <license>LGPLv3</license>
-  <author email="sisahawork@gmail.com">Siddharth Saha</author>
+  <author email="winston.h.chou@gmail.com">Winston Chou</author>
 
   <buildtool_depend>ament_cmake_auto</buildtool_depend>
   

@@ -4,20 +4,15 @@
   <name>tools_launch</name>
   <version>0.0.0</version>
   <description>Launch autonomy stack</description>
-  <maintainer email="winston.h.chou@gmail.com">Siddharth Saha</maintainer>
+  <maintainer email="winston.h.chou@gmail.com">Winston Chou</maintainer>
   <license>LGPLv3</license>
-  <author email="winston.h.chou@gmail.com">Siddharth Saha</author>
+  <author email="winston.h.chou@gmail.com">Winston Chou</author>
 
   <buildtool_depend>ament_cmake_auto</buildtool_depend>
 
   <depend>rclcpp</depend>
-  <exec_depend>base_common</exec_depend>
-  <exec_depend>ghost_car</exec_depend>
-  <exec_depend>bank_angle_collector</exec_depend>
   <exec_depend>environs</exec_depend>
-  <exec_depend>basestation_race_control</exec_depend>
-  <exec_depend>basestation_push2pass</exec_depend>
-  <exec_depend>race_metadata</exec_depend>
+  <exec_depend>common_metadata</exec_depend>
 
   <test_depend>ament_lint_auto</test_depend>
   <test_depend>ament_lint_common</test_depend>

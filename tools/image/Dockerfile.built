@@ -2,7 +2,7 @@ ARG BASE_IMAGE
 
 FROM $BASE_IMAGE as art_image_built
 
-LABEL maintainer="Siddharth Saha <sisahawork@gmail.com>"
+LABEL maintainer="Winston Chou <winston.h.chou@gmail.com>"
 SHELL ["/bin/bash", "-o", "pipefail", "-ic"]
 
 COPY build/ /opt/race_common/build

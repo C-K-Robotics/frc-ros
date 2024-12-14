@@ -1,7 +1,7 @@
 ARG BASE_IMAGE
 
 FROM $BASE_IMAGE as base
-LABEL maintainer="Siddharth Saha <sisahawork@gmail.com>"
+LABEL maintainer="Winston Chou <winston.h.chou@gmail.com>"
 SHELL ["/bin/bash", "-o", "pipefail", "-ic"]
 
 ARG APT_FILE
