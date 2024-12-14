@@ -193,6 +193,37 @@ build-docker-gpu-humble-jetpack5:
 		--build-arg CUSTOM_INSTALL_FILE=custom-installs-jetson.sh \
 		-t ${IMG_NAME} .
 
+.PHONY: build-docker-gpu-humble-jetpack6
+build-docker-gpu-humble-jetpack6:
+	@IMG_NAME=${IMG_NAME}
+	@SSH_FILE_PATH=${SSH_FILE_PATH}
+	eval $(ssh-agent)
+	if [ -z "$${SSH_FILE_PATH}" ] ; then
+		ssh-add ~/.ssh/id_ed25519
+	else
+		ssh-add ${SSH_FILE_PATH}
+	fi
+	DOCKER_BUILDKIT=1 docker build \
+		--network=host \
+		-f tools/image/Dockerfile \
+		--target frc_image \
+		--ssh default=${SSH_AUTH_SOCK} \
+		--build-arg BASE_IMAGE=dustynv/tensorrt:8.6-r36.2.0 \
+		--build-arg ROS_DISTRO=humble \
+		--build-arg ROS_SOURCE="humble" \
+		--build-arg ROS_INSTALL=ros-install.sh\
+		--build-arg SKIP_KEYS="🏎️" \
+		--build-arg APT_FILE=apt-packages-l4t \
+		--build-arg APT_GPU_FILE=empty-deps \
+		--build-arg PIP_FILE=pip3-packages \
+		--build-arg PIP_GPU_FILE=empty-deps \
+		--build-arg PYTORCH_FILE=empty-deps \
+		--build-arg EXPORTS_SCRIPT=exports.sh \
+		--build-arg EXPORTS_GPU_SCRIPT=exports-gpu-cu122.sh \
+		--build-arg VCS_IMPORTS_SCRIPT=vcs-imports-humble.sh \
+		--build-arg CUSTOM_INSTALL_FILE=custom-installs-jp6.sh \
+		-t ${IMG_NAME} .
+
 .PHONY: build-docker-cu122-humble
 build-docker-cu122-humble:
 	@IMG_NAME=${IMG_NAME}

@@ -60,3 +60,12 @@ sudo make -j4 install
 cd ../..
 rm -rf range-v3
 
+wget -qO- https://raw.githubusercontent.com/luxonis/depthai-ros/main/install_dependencies.sh | sudo bash
+cd /tmp
+git clone https://github.com/Livox-SDK/Livox-SDK2.git
+cd ./Livox-SDK2/
+mkdir build && cd build
+cmake .. && make -j4
+sudo make install
+cd /tmp
+rm -rf Livox-SDK2

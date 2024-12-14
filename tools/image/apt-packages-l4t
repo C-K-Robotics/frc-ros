@@ -37,8 +37,8 @@ tcpreplay
 libssl-dev
 dirmngr
 gnupg2
-libopencv-dev
-python3-opencv
+#libopencv-dev
+#python3-opencv
 libpcl-dev
 less
 libusb-1.0-0-dev
