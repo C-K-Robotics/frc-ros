@@ -99,8 +99,8 @@ rosdep-install-list:
 	rosdep update --include-eol-distros
 	rosdep install --as-root "apt:false pip:false" --simulate --reinstall --ignore-src -r -y --rosdistro ${ROS_DISTRO} --from-paths . | sort >> tools/image/ros-deps
 
-.PHONY: build-docker-cpu-iron
-build-docker-cpu-iron:
+.PHONY: build-docker-cpu-humble
+build-docker-cpu-humble:
 	@IMG_NAME=${IMG_NAME}
 	@SSH_FILE_PATH=${SSH_FILE_PATH}
 	eval $(ssh-agent)
@@ -115,8 +115,8 @@ build-docker-cpu-iron:
 		--target art_image \
 		--ssh default=${SSH_AUTH_SOCK} \
 		--build-arg BASE_IMAGE=ubuntu:22.04 \
-		--build-arg ROS_DISTRO=iron \
-		--build-arg ROS_SOURCE=iron \
+		--build-arg ROS_DISTRO=humble \
+		--build-arg ROS_SOURCE=humble \
 		--build-arg ROS_INSTALL=ros-install.sh\
 		--build-arg SKIP_KEYS="🏎️" \
 		--build-arg APT_FILE=apt-packages \
@@ -126,12 +126,12 @@ build-docker-cpu-iron:
 		--build-arg PYTORCH_FILE=pytorch-cpu \
 		--build-arg EXPORTS_SCRIPT=exports.sh \
 		--build-arg EXPORTS_GPU_SCRIPT=empty-script.sh \
-		--build-arg VCS_IMPORTS_SCRIPT=vcs-imports-iron.sh \
+		--build-arg VCS_IMPORTS_SCRIPT=vcs-imports-humble.sh \
 		--build-arg CUSTOM_INSTALL_FILE=custom-installs.sh \
 		-t ${IMG_NAME} .
 
-.PHONY: build-docker-cpu-iron-jetpack6
-build-docker-cpu-iron-jetpack6:
+.PHONY: build-docker-cpu-humble-jetpack6
+build-docker-cpu-humble-jetpack6:
 	@IMG_NAME=${IMG_NAME}
 	@SSH_FILE_PATH=${SSH_FILE_PATH}
 	eval $(ssh-agent)
@@ -146,8 +146,8 @@ build-docker-cpu-iron-jetpack6:
 		--target art_image_built \
 		--ssh default=${SSH_AUTH_SOCK} \
 		--build-arg BASE_IMAGE=nvcr.io/nvidia/l4t-jetpack:r36.2.0 \
-		--build-arg ROS_DISTRO=iron \
-		--build-arg ROS_SOURCE="iron" \
+		--build-arg ROS_DISTRO=humble \
+		--build-arg ROS_SOURCE="humble" \
 		--build-arg ROS_INSTALL=ros-install.sh\
 		--build-arg SKIP_KEYS="🏎️" \
 		--build-arg APT_FILE=apt-packages-l4t \
@@ -157,13 +157,13 @@ build-docker-cpu-iron-jetpack6:
 		--build-arg PYTORCH_FILE=pytorch-cpu \
 		--build-arg EXPORTS_SCRIPT=exports.sh \
 		--build-arg EXPORTS_GPU_SCRIPT=empty-script.sh \
-		--build-arg VCS_IMPORTS_SCRIPT=vcs-imports-iron.sh \
+		--build-arg VCS_IMPORTS_SCRIPT=vcs-imports-humble.sh \
 		--build-arg CUSTOM_INSTALL_FILE=custom-installs-l4t.sh \
 		--build-arg OPENCV_SCRIPT=opencv-480-install.sh \
 		-t ${IMG_NAME} .
 
-.PHONY: build-docker-gpu-iron-jetpack5
-build-docker-gpu-iron-jetpack5:
+.PHONY: build-docker-gpu-humble-jetpack5
+build-docker-gpu-humble-jetpack5:
 	@IMG_NAME=${IMG_NAME}
 	@SSH_FILE_PATH=${SSH_FILE_PATH}
 	eval $(ssh-agent)
@@ -177,9 +177,9 @@ build-docker-gpu-iron-jetpack5:
 		-f tools/image/Dockerfile \
 		--target art_image \
 		--ssh default=${SSH_AUTH_SOCK} \
-		--build-arg BASE_IMAGE=dustynv/ros:iron-pytorch-l4t-r35.3.1 \
-		--build-arg ROS_DISTRO=iron \
-		--build-arg ROS_SOURCE="iron/install" \
+		--build-arg BASE_IMAGE=dustynv/ros:humble-pytorch-l4t-r35.3.1 \
+		--build-arg ROS_DISTRO=humble \
+		--build-arg ROS_SOURCE="humble/install" \
 		--build-arg ROS_INSTALL=ros-jetson-install.sh \
 		--build-arg SKIP_KEYS="librange-v3-dev" \
 		--build-arg APT_FILE=apt-packages-jetson \
@@ -189,7 +189,7 @@ build-docker-gpu-iron-jetpack5:
 		--build-arg PYTORCH_FILE=pytorch-gpu-jetson \
 		--build-arg EXPORTS_SCRIPT=exports-jetson.sh \
 		--build-arg EXPORTS_GPU_SCRIPT=empty-script.sh \
-		--build-arg VCS_IMPORTS_SCRIPT=vcs-imports-iron-jetson.sh \
+		--build-arg VCS_IMPORTS_SCRIPT=vcs-imports-humble-jetson.sh \
 		--build-arg CUSTOM_INSTALL_FILE=custom-installs-jetson.sh \
 		-t ${IMG_NAME} .
 
@@ -224,8 +224,8 @@ build-docker-cu122-humble:
 		--build-arg CUSTOM_INSTALL_FILE=custom-installs.sh \
 		-t ${IMG_NAME} .
 
-.PHONY: build-docker-cu118-iron
-build-docker-cu118-iron:
+.PHONY: build-docker-cu118-humble
+build-docker-cu118-humble:
 	@IMG_NAME=${IMG_NAME}
 	@SSH_FILE_PATH=${SSH_FILE_PATH}
 	eval $(ssh-agent)
@@ -240,8 +240,8 @@ build-docker-cu118-iron:
 		--target art_image \
 		--ssh default=${SSH_AUTH_SOCK} \
 		--build-arg BASE_IMAGE=nvidia/cuda:11.8.0-devel-ubuntu22.04 \
-		--build-arg ROS_DISTRO=iron \
-		--build-arg ROS_SOURCE=iron \
+		--build-arg ROS_DISTRO=humble \
+		--build-arg ROS_SOURCE=humble \
 		--build-arg ROS_INSTALL=ros-install.sh \
 		--build-arg SKIP_KEYS="🏎️" \
 		--build-arg APT_FILE=apt-packages \
@@ -251,12 +251,12 @@ build-docker-cu118-iron:
 		--build-arg PYTORCH_FILE=pytorch-gpu-cu118 \
 		--build-arg EXPORTS_SCRIPT=exports.sh \
 		--build-arg EXPORTS_GPU_SCRIPT=exports-gpu-cu118.sh \
-		--build-arg VCS_IMPORTS_SCRIPT=vcs-imports-iron.sh \
+		--build-arg VCS_IMPORTS_SCRIPT=vcs-imports-humble.sh \
 		--build-arg CUSTOM_INSTALL_FILE=custom-installs.sh \
 		-t ${IMG_NAME} .
 
-.PHONY: build-docker-cu122-iron
-build-docker-cu122-iron:
+.PHONY: build-docker-cu122-humble
+build-docker-cu122-humble:
 	@IMG_NAME=${IMG_NAME}
 	@SSH_FILE_PATH=${SSH_FILE_PATH}
 	eval $(ssh-agent)
@@ -271,8 +271,8 @@ build-docker-cu122-iron:
 		--target art_image \
 		--ssh default=${SSH_AUTH_SOCK} \
 		--build-arg BASE_IMAGE=nvidia/cuda:12.2.2-devel-ubuntu22.04 \
-		--build-arg ROS_DISTRO=iron \
-		--build-arg ROS_SOURCE=iron \
+		--build-arg ROS_DISTRO=humble \
+		--build-arg ROS_SOURCE=humble \
 		--build-arg ROS_INSTALL=ros-install.sh \
 		--build-arg SKIP_KEYS="🏎️" \
 		--build-arg APT_FILE=apt-packages \
@@ -282,7 +282,7 @@ build-docker-cu122-iron:
 		--build-arg PYTORCH_FILE=pytorch-gpu-cu122 \
 		--build-arg EXPORTS_SCRIPT=exports.sh \
 		--build-arg EXPORTS_GPU_SCRIPT=exports-gpu-cu122.sh \
-		--build-arg VCS_IMPORTS_SCRIPT=vcs-imports-iron.sh \
+		--build-arg VCS_IMPORTS_SCRIPT=vcs-imports-humble.sh \
 		--build-arg CUSTOM_INSTALL_FILE=custom-installs.sh \
 		-t ${IMG_NAME} .
 
