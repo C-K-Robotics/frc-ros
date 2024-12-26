@@ -432,7 +432,7 @@ session:
 		INTERACTIVE_FLAGS="-it"
 		ENTRYPOINT="/bin/bash"
 	else
-		INTERACTIVE_FLAGS="-d"
+		INTERACTIVE_FLAGS=""
 		ENTRYPOINT="tail -f /dev/null"
 	fi
 	if [ "${RUNTIME}" = "nvidia" ]; then
