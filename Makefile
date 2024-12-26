@@ -427,13 +427,21 @@ session:
 	@CONT_NAME="${CONT_NAME}"
 	@IMG_NAME="${IMG_NAME}"
 	@RUNTIME="${RUNTIME}"
+	@INTERACTIVE="${INTERACTIVE}"
+	if [ "${INTERACTIVE}" == "true" ]; then
+		INTERACTIVE_FLAGS="-it"
+		ENTRYPOINT="/bin/bash"
+	else
+		INTERACTIVE_FLAGS="-d"
+		ENTRYPOINT="tail -f /dev/null"
+	fi
 	if [ "${RUNTIME}" = "nvidia" ]; then
 		echo "RUNTIME is set to nvidia"
 		xhost +
 		docker run \
 			--name ${CONT_NAME} \
 			--runtime nvidia \
-			-it \
+			$${INTERACTIVE_FLAGS} \
 			--rm \
 			--privileged \
 			--net=host \
@@ -447,12 +455,12 @@ session:
 			--volume='${HOME}/.Xauthority:/root/.Xauthority:rw' \
 			--volume='/tmp/.X11-unix/:/tmp/.X11-unix' \
 			--volume='${PWD}:/opt/frc-ros' \
-			${IMG_NAME}
+			${IMG_NAME} $${ENTRYPOINT}
 	else
 		xhost +
 		docker run \
 			--name ${CONT_NAME} \
-			-it \
+			$${INTERACTIVE_FLAGS} \
 			--rm \
 			--privileged \
 			--net=host \
@@ -464,7 +472,7 @@ session:
 			--volume='${HOME}/.Xauthority:/root/.Xauthority:rw' \
 			--volume='/tmp/.X11-unix/:/tmp/.X11-unix' \
 			--volume='${PWD}:/opt/frc-ros' \
-			${IMG_NAME}
+			${IMG_NAME} $${ENTRYPOINT}
 	fi
 
 .PHONY: join-session
