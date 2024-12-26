@@ -10,6 +10,7 @@ fi
 echo "FRC_ROS_DIR=${PWD}" | sudo tee /etc/default/frc-ros
 echo "ROS_DISTRO=${ROS_DISTRO}" | sudo tee -a /etc/default/frc-ros
 echo "ROSBAG_DIR=${ROSBAG_DIR}" | sudo tee -a /etc/default/frc-ros
+echo "CONT_NAME=frc-ros-container" | sudo tee -a /etc/default/frc-ros
 
 
 # check if user is root
