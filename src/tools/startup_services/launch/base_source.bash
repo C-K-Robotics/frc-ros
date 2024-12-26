@@ -1,7 +1,7 @@
 #!/bin/bash
 source /opt/ros/${ROS_DISTRO}/setup.bash
-source ${RACE_COMMON_DIR}/install/setup.bash
-source ${RACE_COMMON_DIR}/race.env
+source ${FRC_ROS_DIR}/install/setup.bash
+source ${FRC_ROS_DIR}/race.env
 export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
 if [ -f "/etc/cyclone/cyclonedds.xml" ]; then
     export CYCLONEDDS_URI=file:///etc/cyclone/cyclonedds.xml

@@ -6,10 +6,10 @@ if [ -z ${ROS_DISTRO+x} ]; then
     exit 1
 fi
 
-# add some env variables to /etc/default/race_common
-echo "RACE_COMMON_DIR=${PWD}" | sudo tee /etc/default/race_common
-echo "ROS_DISTRO=${ROS_DISTRO}" | sudo tee -a /etc/default/race_common
-echo "ROSBAG_DIR=${ROSBAG_DIR}" | sudo tee -a /etc/default/race_common
+# add some env variables to /etc/default/frc-ros
+echo "FRC_ROS_DIR=${PWD}" | sudo tee /etc/default/frc-ros
+echo "ROS_DISTRO=${ROS_DISTRO}" | sudo tee -a /etc/default/frc-ros
+echo "ROSBAG_DIR=${ROSBAG_DIR}" | sudo tee -a /etc/default/frc-ros
 
 
 # check if user is root
