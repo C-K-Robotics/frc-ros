@@ -444,7 +444,7 @@ session:
 			--device-cgroup-rule='c 189:* rmw' \
 			--device /dev/video0 \
 			--volume='/dev/input:/dev/input' \
-			--volume='${HOME}.Xauthority:/root/.Xauthority:rw' \
+			--volume='${HOME}/.Xauthority:/root/.Xauthority:rw' \
 			--volume='/tmp/.X11-unix/:/tmp/.X11-unix' \
 			--volume='${PWD}:/opt/frc-ros' \
 			${IMG_NAME}
@@ -461,7 +461,7 @@ session:
 			--device-cgroup-rule='c 189:* rmw' \
 			--device /dev/video0 \
 			--volume='/dev/input:/dev/input' \
-			--volume='${HOME}.Xauthority:/root/.Xauthority:rw' \
+			--volume='${HOME}/.Xauthority:/root/.Xauthority:rw' \
 			--volume='/tmp/.X11-unix/:/tmp/.X11-unix' \
 			--volume='${PWD}:/opt/frc-ros' \
 			${IMG_NAME}
