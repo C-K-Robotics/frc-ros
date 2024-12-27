@@ -60,6 +60,8 @@ sudo make -j4 install
 cd ../..
 rm -rf range-v3
 
+apt install -y ros-$ROS_DISTRO-librealsense2*
+
 wget -qO- https://raw.githubusercontent.com/luxonis/depthai-ros/main/install_dependencies.sh | sudo bash
 cd /tmp
 git clone https://github.com/Livox-SDK/Livox-SDK2.git

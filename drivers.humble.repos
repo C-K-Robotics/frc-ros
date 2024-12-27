@@ -7,3 +7,7 @@ repositories:
         type: git
         url: git@github.com:luxonis/depthai-ros.git
         version: humble
+    src/external/drivers/realsense-ros:
+        type: git
+        url: git@github.com:IntelRealSense/realsense-ros.git
+        version: ros2-master

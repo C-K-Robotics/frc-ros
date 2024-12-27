@@ -118,7 +118,7 @@ build-docker-cpu-humble:
 		--build-arg ROS_DISTRO=humble \
 		--build-arg ROS_SOURCE=humble \
 		--build-arg ROS_INSTALL=ros-install.sh\
-		--build-arg SKIP_KEYS="🏎️" \
+		--build-arg SKIP_KEYS=skip-keys \
 		--build-arg APT_FILE=apt-packages \
 		--build-arg APT_GPU_FILE=empty-deps \
 		--build-arg PIP_FILE=pip3-packages \
@@ -149,7 +149,7 @@ build-docker-cpu-humble-jetpack6:
 		--build-arg ROS_DISTRO=humble \
 		--build-arg ROS_SOURCE="humble" \
 		--build-arg ROS_INSTALL=ros-install.sh\
-		--build-arg SKIP_KEYS="🏎️" \
+		--build-arg SKIP_KEYS=skip-keys \
 		--build-arg APT_FILE=apt-packages-l4t \
 		--build-arg APT_GPU_FILE=empty-deps \
 		--build-arg PIP_FILE=pip3-packages \
@@ -181,7 +181,7 @@ build-docker-gpu-humble-jetpack5:
 		--build-arg ROS_DISTRO=humble \
 		--build-arg ROS_SOURCE="humble/install" \
 		--build-arg ROS_INSTALL=ros-jetson-install.sh \
-		--build-arg SKIP_KEYS="librange-v3-dev" \
+		--build-arg SKIP_KEYS=skip-keys \
 		--build-arg APT_FILE=apt-packages-jetson \
 		--build-arg APT_GPU_FILE=empty-deps \
 		--build-arg PIP_FILE=pip3-packages-jetson \
@@ -212,7 +212,7 @@ build-docker-gpu-humble-jetpack6:
 		--build-arg ROS_DISTRO=humble \
 		--build-arg ROS_SOURCE="humble" \
 		--build-arg ROS_INSTALL=ros-install.sh\
-		--build-arg SKIP_KEYS="🏎️" \
+		--build-arg SKIP_KEYS=skip-keys \
 		--build-arg APT_FILE=apt-packages-l4t \
 		--build-arg APT_GPU_FILE=empty-deps \
 		--build-arg PIP_FILE=pip3-packages \
@@ -243,7 +243,7 @@ build-docker-cu122-humble:
 		--build-arg ROS_DISTRO=humble \
 		--build-arg ROS_SOURCE=humble \
 		--build-arg ROS_INSTALL=ros-install.sh \
-		--build-arg SKIP_KEYS="🏎️" \
+		--build-arg SKIP_KEYS=skip-keys \
 		--build-arg APT_FILE=apt-packages \
 		--build-arg APT_GPU_FILE=apt-packages-gpu-cu122 \
 		--build-arg PIP_FILE=pip3-packages \
@@ -274,7 +274,7 @@ build-docker-cu118-humble:
 		--build-arg ROS_DISTRO=humble \
 		--build-arg ROS_SOURCE=humble \
 		--build-arg ROS_INSTALL=ros-install.sh \
-		--build-arg SKIP_KEYS="🏎️" \
+		--build-arg SKIP_KEYS=skip-keys \
 		--build-arg APT_FILE=apt-packages \
 		--build-arg APT_GPU_FILE=apt-packages-gpu-cu118 \
 		--build-arg PIP_FILE=pip3-packages \
@@ -305,7 +305,7 @@ build-docker-cu122-humble:
 		--build-arg ROS_DISTRO=humble \
 		--build-arg ROS_SOURCE=humble \
 		--build-arg ROS_INSTALL=ros-install.sh \
-		--build-arg SKIP_KEYS="🏎️" \
+		--build-arg SKIP_KEYS=skip-keys \
 		--build-arg APT_FILE=apt-packages \
 		--build-arg APT_GPU_FILE=apt-packages-gpu-cu122 \
 		--build-arg PIP_FILE=pip3-packages \

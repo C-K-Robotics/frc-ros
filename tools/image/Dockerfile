@@ -58,6 +58,9 @@ RUN rm -rf /frc_tmp
 
 FROM base as base_custom
 
+ARG ROS_DISTRO
+ENV ROS_DISTRO=${ROS_DISTRO}
+
 COPY tools/image/${CUSTOM_INSTALL_FILE} /frc_tmp/${CUSTOM_INSTALL_FILE}
 RUN --mount=type=ssh \
     DEBIAN_FRONTEND=noninteractive /bin/sh /frc_tmp/${CUSTOM_INSTALL_FILE} && \

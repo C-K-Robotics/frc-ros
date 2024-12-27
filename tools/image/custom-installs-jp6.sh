@@ -47,6 +47,8 @@ mv target/release/libzenoh_plugin_ros2dds.so /usr/local/lib/
 cd ../
 rm -rf zenoh-plugin-ros2dds
 
+apt install -y ros-$ROS_DISTRO-librealsense2*
+
 wget -qO- https://raw.githubusercontent.com/luxonis/depthai-ros/main/install_dependencies.sh | sudo bash
 
 cd /tmp
