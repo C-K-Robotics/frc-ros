@@ -430,7 +430,7 @@ session:
 	@INTERACTIVE="${INTERACTIVE}"
 	if [ "${INTERACTIVE}" == "true" ]; then
 		INTERACTIVE_FLAGS="-it"
-		ENTRYPOINT="/bin/bash"
+		# ENTRYPOINT="/bin/bash"
 	else
 		INTERACTIVE_FLAGS=""
 		ENTRYPOINT="tail -f /dev/null"
