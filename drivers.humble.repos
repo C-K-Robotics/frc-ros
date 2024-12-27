@@ -6,4 +6,4 @@ repositories:
     src/external/drivers/depthai-ros:
         type: git
         url: git@github.com:luxonis/depthai-ros.git
-        version: iron
+        version: humble
