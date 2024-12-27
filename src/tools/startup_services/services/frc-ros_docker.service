@@ -12,5 +12,5 @@ TimeoutStartSec=600s
 TimeoutStopSec=5s
 
 [Install]
-WantedBy=multi-user.target
+WantedBy=default.target
 

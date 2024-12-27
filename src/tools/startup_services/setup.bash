@@ -38,6 +38,16 @@ else
         sudo ln -s -f $file ~/.config/systemd/user/$(basename $file)
     done
 
+    # create a folder for the user if it doesn't exist already
+    if [ ! -d "~/.config/systemd/user/default.target.wants" ]; then
+        sudo mkdir -p ~/.config/systemd/user/default.target.wants
+    fi
+
+    # create a symlink in its WantedBy directory
+    for file in ${PWD}/src/tools/startup_services/services/*.service; do
+        sudo ln -s -f $file ~/.config/systemd/user/default.target.wants/$(basename $file)
+    done
+
     # update the systemd daemon
     systemctl --user daemon-reload
 
