@@ -27,8 +27,8 @@ gc_launch = IncludeLaunchDescription(
                 get_package_share_directory("race_metadata"), "ttls", env.str("TTL_FOLDER")
             )
         ),
-        "vehicle_name": TextSubstitution(text=env.str("VEHICLE_NAME")),
-        "race_type": TextSubstitution(text=env.str("RACE_TYPE")),
+        "robot_name": TextSubstitution(text=env.str("ROBOT_NAME")),
+        "game_type": TextSubstitution(text=env.str("GAME_TYPE")),
         "use_sim_time": TextSubstitution(text=str(env.bool("USE_SIM_TIME"))),
         "controller_type": TextSubstitution(text=env.str("GHOST_CAR_CONTROLLER")),
     }.items(),
