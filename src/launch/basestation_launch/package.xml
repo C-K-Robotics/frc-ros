@@ -8,16 +8,10 @@
   <license>TODO: License declaration</license>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
-  <depend>joy</depend>
-  <depend>joy_teleop</depend>
-  <exec_depend>ackermann_msgs</exec_depend>
 
   <exec_depend>robot_state_publisher</exec_depend>
-  <exec_depend>joint_state_publisher</exec_depend>
-  <exec_depend>joint_state_publisher_gui</exec_depend>
   <exec_depend>xacro</exec_depend>
   <exec_depend>rviz</exec_depend>
-  <exec_depend>robot_localization</exec_depend>
 
   <exec_depend>environs</exec_depend>
 
