@@ -24,13 +24,13 @@ def yaml_decode(yaml_input_path):
             return numeric_inputs, string_inputs
 
 def generate_launch_description():
-    sensors_pkg = 'sensors'
+    sensor_launch_pkg = 'sensor_launch'
 
     slice_info_num, slice_info_str = yaml_decode(slice_param_path)
     # print(slice_info_num, '\n', slice_info_str)
     
     pcl_to_scan_config = os.path.join(
-        get_package_share_directory(sensors_pkg),
+        get_package_share_directory(sensor_launch_pkg),
         'param',
         'pcl_to_scan.yaml'
     )

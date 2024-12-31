@@ -2,7 +2,7 @@ from setuptools import setup
 import os
 from glob import glob
 
-package_name = 'sensors'
+package_name = 'sensor_launch'
 
 setup(
     name=package_name,

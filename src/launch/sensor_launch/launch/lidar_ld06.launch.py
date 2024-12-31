@@ -10,7 +10,7 @@ from launch_ros.actions import PushRosNamespace
 
 
 def generate_launch_description():
-    sensor_pkg = 'sensors'
+    sensor_pkg = 'sensor_launch'
     some_package = 'ldlidar'
     some_node = 'ldlidar'    
     some_config = 'ld06.yaml'
