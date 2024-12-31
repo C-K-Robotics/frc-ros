@@ -26,3 +26,8 @@ repositories:
         type: git
         url: git@github.com:C-K-Robotics/networktable_bridge.git
         version: main
+    # pcl utils
+    src/external/pcl/utils/pointcloud_to_laserscan:
+        type: git
+        url: https://github.com/ros-perception/pointcloud_to_laserscan.git
+        version: humble
