@@ -20,10 +20,10 @@ repositories:
         type: git
         url: git@github.com:foxglove/ros-foxglove-bridge.git 
         version: 0.8.2
-    src/external/utils/misc/external/nav2_msgs:
-        type: git
-        url: git@github.com:ros-planning/navigation2.git
-        version: humble
+    # src/external/utils/misc/external/nav2_msgs:
+    #     type: git
+    #     url: git@github.com:ros-planning/navigation2.git
+    #     version: humble
     src/external/utils/misc/external/pluginlib:
         type: git
         url: git@github.com:ros/pluginlib.git
