@@ -33,7 +33,7 @@ ntb_node = Node(
     condition=IfCondition(LaunchConfiguration("launch_ntb")),
 )
 
-
+# OAKD_PRO_W, OAKD_LITE
 def generate_launch_description():
     return LaunchDescription(
         [
