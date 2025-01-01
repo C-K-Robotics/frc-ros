@@ -56,6 +56,16 @@ build-select-debug:
 	source ./tools/scripts/source_all.sh
 	colcon build --cmake-args -DCMAKE_BUILD_TYPE=Debug --packages-select ${PACKAGES}
 
+.PHONY: build-ci
+build-ci:
+	source ./tools/scripts/source_all.sh
+	colcon build --cmake-args -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER_LAUNCHER=ccache -DCMAKE_CXX_COMPILER_LAUNCHER=ccache -DCMAKE_EXE_LINKER_FLAGS=-fuse-ld=lld -DCMAKE_MODULE_LINKER_FLAGS=-fuse-ld=lld -DCMAKE_SHARED_LINKER_FLAGS=-fuse-ld=lld --packages-up-to autonomy_launch tools_launch
+
+.PHONY: test-ci
+test-ci:
+	source ./tools/scripts/source_all.sh
+	colcon test --return-code-on-test-failure --packages-select $(shell cat .github/packages_for_test.txt); colcon test-result --verbose || ([ -z "$FAIL_ON_TEST_FAILURE" ] || exit 1)
+
 .PHONY: test-select
 test-select:
 	@PACKAGES="${PACKAGES}"
