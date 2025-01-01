@@ -29,7 +29,7 @@ build-debug:
 	@PACKAGES="${PACKAGES}"
 	source ./tools/scripts/source_all.sh
 	if [ -z "$${PACKAGES}" ] ; then
-		colcon build --cmake-args -DCMAKE_BUILD_TYPE=Debug --packages-up-to autonomy_launch basestation_launch tools_launch
+		colcon build --cmake-args -DCMAKE_BUILD_TYPE=Debug --packages-up-to autonomy_launch tools_launch
 	else
 		colcon build --cmake-args -DCMAKE_BUILD_TYPE=Debug --packages-up-to ${PACKAGES}
 	fi
@@ -39,7 +39,7 @@ build:
 	@PACKAGES="${PACKAGES}"
 	source ./tools/scripts/source_all.sh
 	if [ -z "$${PACKAGES}" ] ; then
-		colcon build --cmake-args -DCMAKE_BUILD_TYPE=Release --packages-up-to autonomy_launch basestation_launch tools_launch
+		colcon build --cmake-args -DCMAKE_BUILD_TYPE=Release --packages-up-to autonomy_launch tools_launch
 	else
 		colcon build --cmake-args -DCMAKE_BUILD_TYPE=Release --packages-up-to ${PACKAGES}
 	fi
