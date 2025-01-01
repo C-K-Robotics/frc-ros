@@ -15,6 +15,7 @@ setup(
         (os.path.join('share', package_name, 'launch'), glob('launch/*launch.py')),
         (os.path.join('share', package_name, 'config'), glob('config/*.yaml')),
         (os.path.join('share', package_name, 'config/livox_config/'), glob('config/livox_config/*')),
+        (os.path.join('share', package_name, 'config/oakd_config/'), glob('config/oakd_config/*')),
     ],
     install_requires=['setuptools'],
     zip_safe=True,

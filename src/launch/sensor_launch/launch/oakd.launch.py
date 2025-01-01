@@ -66,7 +66,7 @@ def generate_launch_description():
         DeclareLaunchArgument("cam_roll", default_value="0.0"),
         DeclareLaunchArgument("cam_pitch", default_value="0.0"),
         DeclareLaunchArgument("cam_yaw", default_value="0.0"),
-        DeclareLaunchArgument("params_file", default_value=os.path.join(launch_dir, 'config', 'oakd.param.yaml')),
+        DeclareLaunchArgument("params_file", default_value=os.path.join(launch_dir, 'config/oakd_config', 'oakd.param.yaml')),
         DeclareLaunchArgument("use_rviz", default_value="False"),
         DeclareLaunchArgument("rectify_rgb", default_value="True"),
     ]

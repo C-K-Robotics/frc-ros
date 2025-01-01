@@ -15,7 +15,9 @@ def launch_setup(context, *args, **kwargs):
     depthai_prefix = get_package_share_directory("depthai_ros_driver")
     launch_dir = get_package_share_directory("sensor_launch")
     name = LaunchConfiguration("name").perform(context)
-
+    rgb_topic_name = name+'/rgb/image_raw'
+    if LaunchConfiguration('rectify_rgb').perform(context)=='true':
+        rgb_topic_name = name +'/rgb/image_rect'
     return [
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource(
@@ -50,6 +52,24 @@ def launch_setup(context, *args, **kwargs):
                 ),
             ],
         ),
+
+        LoadComposableNodes(
+            condition=IfCondition(LaunchConfiguration("rectify_rgb")),
+            target_container=name+"_container",
+            composable_node_descriptions=[
+                    ComposableNode(
+                        package="image_proc",
+                        plugin="image_proc::RectifyNode",
+                        name="rectify_color_node",
+                        remappings=[('image', name+'/rgb/image_raw'),
+                                    ('camera_info', name+'/rgb/camera_info'),
+                                    ('image_rect', name+'/rgb/image_rect'),
+                                    ('image_rect/compressed', name+'/rgb/image_rect/compressed'),
+                                    ('image_rect/compressedDepth', name+'/rgb/image_rect/compressedDepth'),
+                                    ('image_rect/theora', name+'/rgb/image_rect/theora')]
+                    )
+            ]
+        ),
     ]
 
 
@@ -65,8 +85,9 @@ def generate_launch_description():
         DeclareLaunchArgument("cam_roll", default_value="0.0"),
         DeclareLaunchArgument("cam_pitch", default_value="0.0"),
         DeclareLaunchArgument("cam_yaw", default_value="0.0"),
-        DeclareLaunchArgument("params_file", default_value=os.path.join(launch_dir, "config", "oakd_pcl.param.yaml"),),
+        DeclareLaunchArgument("params_file", default_value=os.path.join(launch_dir, "config/oakd_config", "oakd_pcl.param.yaml"),),
         DeclareLaunchArgument("use_rviz", default_value="False"),
+        DeclareLaunchArgument("rectify_rgb", default_value="True"),
     ]
 
     return LaunchDescription(
