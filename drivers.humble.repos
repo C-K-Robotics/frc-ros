@@ -11,3 +11,7 @@ repositories:
         type: git
         url: git@github.com:IntelRealSense/realsense-ros.git
         version: ros2-master
+    src/external/drivers/ldlidar:
+        type: git
+        url: https://github.com/linorobot/ldlidar.git
+        version: ros2
