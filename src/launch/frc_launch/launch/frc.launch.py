@@ -3,6 +3,7 @@ from launch import LaunchDescription
 from launch.conditions import IfCondition
 from launch.substitutions import LaunchConfiguration, TextSubstitution
 from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription
+from launch_ros.actions import Node
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 import os
 from environs import Env
@@ -11,29 +12,25 @@ env = Env()
 env.read_env("stack.env")
 
 launch_dir = get_package_share_directory("frc_launch")
-gc_dir = get_package_share_directory("ghost_car")
-depthai_dir = get_package_share_directory("depthai_ros_driver")
+nt_bridge_dir = get_package_share_directory("networktable_bridge")
 
-launch_gc = DeclareLaunchArgument(
-    "launch_gc",
-    default_value=str(env.bool("LAUNCH_GHOST_CAR")),
-    description="If we should use MCC in place of RVC",
+launch_ntb = DeclareLaunchArgument(
+    "launch_ntb",
+    default_value=str(env.bool("LAUNCH_NETWORKTABLE")),
+    description="If we should launch networktable bridge for subscribing all NT topics",
 )
 
-gc_launch = IncludeLaunchDescription(
-    PythonLaunchDescriptionSource(os.path.join(gc_dir, "launch", "ghost_car.launch.py")),
-    launch_arguments={
-        "ttl_dir": TextSubstitution(
-            text=os.path.join(
-                get_package_share_directory("race_metadata"), "ttls", env.str("TTL_FOLDER")
-            )
-        ),
-        "robot_name": TextSubstitution(text=env.str("ROBOT_NAME")),
-        "game_type": TextSubstitution(text=env.str("GAME_TYPE")),
-        "use_sim_time": TextSubstitution(text=str(env.bool("USE_SIM_TIME"))),
-        "controller_type": TextSubstitution(text=env.str("GHOST_CAR_CONTROLLER")),
-    }.items(),
-    condition=IfCondition(LaunchConfiguration("launch_gc")),
+ntb_node = Node(
+    package="networktable_bridge",
+    executable="nt_client_sub_node",
+    name="ntb_sub_all",
+    output="screen",
+    parameters=[
+        {"NT_server_ip": env.str("ROBOT_IP")},
+        {"sampling_time": 0.1},
+        {"automated": True},
+    ],
+    condition=IfCondition(LaunchConfiguration("launch_ntb")),
 )
 
 
@@ -41,10 +38,10 @@ def generate_launch_description():
     return LaunchDescription(
         [
             # Declare arguments
-            launch_foxglove,
+            launch_ntb,
             
             # Include components conditionally
-            foxglove_launch,
+            ntb_node,
             # rde_launch,
             # rpp_launch,
         ]
