@@ -8,15 +8,12 @@
   <license>TODO: License declaration</license>
 
   <depend>rclpy</depend>
-  <depend>tf2_ros_py</depend>
 
+  <depend>tf2_ros_py</depend>
   <depend>python3-numpy</depend>
   <depend>std_msgs</depend>
   <depend>geometry_msgs</depend>
-  <depend>ackermann_msgs</depend>
-
   <exec_depend>rviz</exec_depend>
-  <exec_depend>robot_localization</exec_depend>
 
   <test_depend>ament_copyright</test_depend>
   <test_depend>ament_flake8</test_depend>
