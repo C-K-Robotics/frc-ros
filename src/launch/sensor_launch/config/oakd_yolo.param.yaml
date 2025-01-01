@@ -1,0 +1,103 @@
+/oak:
+  ros__parameters:
+    camera:
+      i_nn_type: spatial
+      i_fps: 30.0
+      # i_restart_on_diagnostics_error: true
+    stereo:
+      i_subpixel: true
+    rgb:
+      i_enable_preview: true
+      i_preview_size: 416
+      i_keep_preview_aspect_ratio: false
+    nn:
+      i_enable_passthrough: true
+      i_disable_resize: true
+      i_nn_config_path: depthai_ros_driver/yolo
+/spatial_bb_node:
+  ros__parameters:
+    desqueeze: true
+    label_map: ["person",
+                "bicycle",
+                "car",
+                "motorbike",
+                "aeroplane",
+                "bus",
+                "train",
+                "truck",
+                "boat",
+                "traffic light",
+                "fire hydrant",
+                "stop sign",
+                "parking meter",
+                "bench",
+                "bird",
+                "cat",
+                "dog",
+                "horse",
+                "sheep",
+                "cow",
+                "elephant",
+                "bear",
+                "zebra",
+                "giraffe",
+                "backpack",
+                "umbrella",
+                "handbag",
+                "tie",
+                "suitcase",
+                "frisbee",
+                "skis",
+                "snowboard",
+                "sports ball",
+                "kite",
+                "baseball bat",
+                "baseball glove",
+                "skateboard",
+                "surfboard",
+                "tennis racket",
+                "bottle",
+                "wine glass",
+                "cup",
+                "fork",
+                "knife",
+                "spoon",
+                "bowl",
+                "banana",
+                "apple",
+                "sandwich",
+                "orange",
+                "broccoli",
+                "carrot",
+                "hot dog",
+                "pizza",
+                "donut",
+                "cake",
+                "chair",
+                "sofa",
+                "pottedplant",
+                "bed",
+                "diningtable",
+                "toilet",
+                "tvmonitor",
+                "laptop",
+                "mouse",
+                "remote",
+                "keyboard",
+                "cell phone",
+                "microwave",
+                "oven",
+                "toaster",
+                "sink",
+                "refrigerator",
+                "book",
+                "clock",
+                "vase",
+                "scissors",
+                "teddy bear",
+                "hair drier",
+                "toothbrush"]
+/detection_overlay_node:
+  ros__parameters:
+    label_map: ["obstacle"]
+
