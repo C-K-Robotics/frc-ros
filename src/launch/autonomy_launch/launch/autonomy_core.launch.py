@@ -27,6 +27,7 @@ env.read_env("stack.env")
 
 launch_dir = get_package_share_directory("autonomy_launch")
 foxglove_dir = get_package_share_directory("foxglove_bridge")
+frc_dir = get_package_share_directory("frc_launch")
 # rde_dir = get_package_share_directory("race_decision_engine")
 # rpp_dir = get_package_share_directory("race_path_planner")
 
@@ -41,6 +42,19 @@ foxglove_launch = IncludeLaunchDescription(
         os.path.join(foxglove_dir, "launch", "foxglove_bridge_launch.xml")
     ),
     condition=IfCondition(LaunchConfiguration("launch_foxglove")),
+)
+
+frc_launch = IncludeLaunchDescription(
+    PythonLaunchDescriptionSource(
+        os.path.join(frc_dir, "launch", "frc.launch.py")
+    ),
+    launch_arguments={
+        "map_dir": TextSubstitution(
+            text=get_share_file("common_metadata", "maps", env.str("MAP_FOLDER"))
+        ),
+        "game_type": TextSubstitution(text=env.str("GAME_TYPE")),
+        "robot_name": TextSubstitution(text=env.str("ROBOT_NAME")),
+    }.items(),
 )
 
 # rde_launch = IncludeLaunchDescription(
@@ -76,6 +90,7 @@ def generate_launch_description():
             
             # Include components conditionally
             foxglove_launch,
+            frc_launch,
             # rde_launch,
             # rpp_launch,
         ]

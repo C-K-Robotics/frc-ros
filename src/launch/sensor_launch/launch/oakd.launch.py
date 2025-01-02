@@ -69,6 +69,7 @@ def generate_launch_description():
         DeclareLaunchArgument("params_file", default_value=os.path.join(launch_dir, 'config/oakd_config', 'oakd.param.yaml')),
         DeclareLaunchArgument("use_rviz", default_value="False"),
         DeclareLaunchArgument("rectify_rgb", default_value="True"),
+        DeclareLaunchArgument("publish_tf_from_calibration", default_value='false', description='Enables TF publishing from camera calibration file.'),
     ]
 
     return LaunchDescription(
