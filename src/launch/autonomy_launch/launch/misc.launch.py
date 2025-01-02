@@ -23,6 +23,12 @@ if env.str("ROBOT_NAME") == "KIT_BOT" or env.str("ROBOT_NAME") == "IAC_CAR":
 #         default_value=get_share_file("common_metadata", "urdf", "robot", "av24.urdf"),
 #         description="Robot we are running",
 #     )
+else:
+    robot_name_arg = DeclareLaunchArgument(
+        name="urdf_path",
+        default_value=get_share_file("common_metadata", "urdf", "robot", "av24.urdf"),
+        description="Robot we are running",
+    )
 
 gui_arg = DeclareLaunchArgument(
     name="gui",

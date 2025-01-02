@@ -119,6 +119,8 @@ ARG ROS_SOURCE
 ARG EXPORTS_SCRIPT
 ARG EXPORTS_GPU_SCRIPT
 
+ENV ROS_DISTRO=${ROS_DISTRO}
+
 COPY tools/image/${EXPORTS_SCRIPT} /frc_tmp/${EXPORTS_SCRIPT}
 COPY tools/image/${EXPORTS_GPU_SCRIPT} /frc_tmp/${EXPORTS_GPU_SCRIPT}
 RUN  cd /frc_tmp && \
@@ -127,8 +129,6 @@ RUN  cd /frc_tmp && \
     rm -rf /frc_tmp/
 
 COPY tools/image/cyclonedds.xml /etc/cyclone/cyclonedds.xml
-
-ENV ROS_DISTRO=${ROS_DISTRO}
 
 FROM frc_image as frc_image_built
 

@@ -13,6 +13,8 @@
   <depend>rclcpp</depend>
   
   <exec_depend>environs</exec_depend>
+  <exec_depend>base_common</exec_depend>
+  <exec_depend>common_metadata</exec_depend>
   <exec_depend>frc_launch</exec_depend>
 
   <exec_depend>robot_state_publisher</exec_depend>

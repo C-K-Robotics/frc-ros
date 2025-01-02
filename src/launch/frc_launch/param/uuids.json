@@ -1,0 +1,62 @@
+{
+    "MAPS": {
+        "LVMS": {
+            "TIME_ZONE_OFFSET": -6,
+            "UUID": "a3be7bf6-b5a6-4e48-833d-a1f1dd6d7a1e",
+            "BASE_START_POSE": [
+                133.231,
+                0.0,
+                -138.280,
+                0.0,
+                122.0,
+                0.0
+            ]
+        },
+        "IMS": {
+            "TIME_ZONE_OFFSET": -4,
+            "UUID": "IMS-01",
+            "BASE_START_POSE": [
+                100.0,
+                0.0,
+                0.0,
+                0.0,
+                270,
+                0.0
+            ]
+        },
+        "Monza": {
+            "TIME_ZONE_OFFSET": 2,
+            "UUID": "Monza-01",
+            "BASE_START_POSE": [
+                100.0,
+                0.0,
+                -10.0,
+                0.0,
+                270.0,
+                0.0
+            ]
+        },
+        "Putnam": {
+            "TIME_ZONE_OFFSET": -4,
+            "UUID": "Putnam-01",
+            "BASE_START_POSE": [
+                2030.62,
+                261.64,
+                1266.02,
+                0.0,
+                90.0,
+                0.0
+            ]
+        }
+    },
+    "SENSORS": {
+        "OAKD_LITE_PCL": "oak_d_lite",
+        "OAKD_PRO_W_PCL": "oak_d_pro_w",
+        "OAKD_LITE_YOLO": "oak_d_lite",
+        "OAKD_PRO_W_YOLO": "oak_d_pro_w",
+        "OAKD_LITE": "oak_d_lite",
+        "OAKD_PRO_W": "oak_d_pro_w",
+        "LD06": "ld06",
+        "MID360": "livox_mid360"
+    }
+}

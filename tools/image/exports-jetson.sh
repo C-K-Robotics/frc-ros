@@ -1,5 +1,5 @@
 # For Python packages
-echo export PATH="${PATH:+:${PATH}}/usr/local/lib/python3.8/dist-packages" >> /etc/bash.bashrc
+echo export PATH="${PATH:+:${PATH}}/usr/local/lib/python3.10/dist-packages" >> /etc/bash.bashrc
 # For ROS2
 echo "source /opt/ros/${ROS_SOURCE}/setup.bash" >> /etc/bash.bashrc
 echo export "RMW_IMPLEMENTATION=rmw_cyclonedds_cpp" >> /etc/bash.bashrc
