@@ -142,8 +142,8 @@ jobs:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
       - name: Import External Repos
         run: |
-          bash -c 'make vcs-import VCS_FILE=race.common.${ROS_DISTRO}.repos; \
-          make vcs-import VCS_FILE=svl.${ROS_DISTRO}.repos'
+          bash -c 'make vcs-import VCS_FILE=frc.ros.${ROS_DISTRO}.repos; \
+          make vcs-import VCS_FILE=drivers.${ROS_DISTRO}.repos'
       - name: Ccache
         uses: hendrikmuhs/ccache-action@v1.2
         with:
