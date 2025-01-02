@@ -48,22 +48,22 @@ foxglove_launch = IncludeLaunchDescription(
 #         os.path.join(rde_dir, "launch", "race_decision_engine.launch.py")
 #     ),
 #     launch_arguments={
-#         "ttl_dir": TextSubstitution(
-#             text=get_share_file("race_metadata", "ttls", env.str("TTL_FOLDER"))
+#         "map_dir": TextSubstitution(
+#             text=get_share_file("common_metadata", "maps", env.str("MAP_FOLDER"))
 #         ),
 #         "game_type": TextSubstitution(text=env.str("GAME_TYPE")),
-#         "use_sim_time": TextSubstitution(text=str(env.bool("USE_SIM_TIME"))),
+#         "robot_name": TextSubstitution(text=env.str("ROBOT_NAME")),
 #     }.items(),
 # )
 
 # rpp_launch = IncludeLaunchDescription(
 #     PythonLaunchDescriptionSource(os.path.join(rpp_dir, "launch", "race_path_planner.launch.py")),
 #     launch_arguments={
-#         "ttl_dir": TextSubstitution(
-#             text=get_share_file("race_metadata", "ttls", env.str("TTL_FOLDER"))
+#         "map_dir": TextSubstitution(
+#             text=get_share_file("common_metadata", "maps", env.str("MAP_FOLDER"))
 #         ),
 #         "game_type": TextSubstitution(text=env.str("GAME_TYPE")),
-#         "use_sim_time": TextSubstitution(text=str(env.bool("USE_SIM_TIME"))),
+#         "robot_name": TextSubstitution(text=env.str("ROBOT_NAME")),
 #     }.items(),
 # )
 
