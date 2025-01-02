@@ -21,7 +21,7 @@ def generate_launch_description():
     ld = LaunchDescription()
     config = os.path.join(
         get_package_share_directory(sensor_pkg),
-        'param',
+        'config',
         some_config)
         
     sensor_node=Node(
