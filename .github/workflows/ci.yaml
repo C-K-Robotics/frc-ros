@@ -31,8 +31,8 @@ jobs:
             PYTORCH_FILE: pytorch-cpu
             EXPORTS_SCRIPT: exports.sh
             EXPORTS_GPU_SCRIPT: empty-script.sh
-            VCS_IMPORTS_SCRIPT: vcs-imports-svl-humble.sh
-            CUSTOM_INSTALL_FILE: custom-installs-svl.sh
+            VCS_IMPORTS_SCRIPT: vcs-imports-humble.sh
+            CUSTOM_INSTALL_FILE: custom-installs.sh
     outputs:
       image_name: ${{ steps.save_image_name.outputs.image_name }}
       cache_name: ${{ steps.save_image_name.outputs.cache_name }}
