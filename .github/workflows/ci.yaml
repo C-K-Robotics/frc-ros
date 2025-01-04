@@ -188,7 +188,7 @@ jobs:
       matrix:
         include:
           - SAVE_NAME: frc_ros_humble_cpu
-            BASE_IMAGE: arm64v8/ros:humble
+            BASE_IMAGE: arm64v8/ubuntu:22.04
             ROS_DISTRO: humble
             ROS_SOURCE: humble
             ROS_INSTALL: ros-install.sh
