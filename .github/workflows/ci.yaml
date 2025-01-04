@@ -201,7 +201,7 @@ jobs:
             EXPORTS_SCRIPT: exports-jetson.sh
             EXPORTS_GPU_SCRIPT: empty-script.sh
             VCS_IMPORTS_SCRIPT: vcs-imports-humble-jetson.sh
-            CUSTOM_INSTALL_FILE: custom-installs-jetson.sh
+            CUSTOM_INSTALL_FILE: custom-installs.sh
     outputs:
       image_name: ${{ steps.save_image_name.outputs.image_name }}
       cache_name: ${{ steps.save_image_name.outputs.cache_name }}
