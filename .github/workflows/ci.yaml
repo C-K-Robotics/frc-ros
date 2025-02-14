@@ -175,7 +175,7 @@ jobs:
       - name: Clean tests
         run: |
           bash -ic 'make clean-test'
-  build-push-arm64:
+  build-push-arm64v8:
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -246,7 +246,7 @@ jobs:
         id: docker_build_push
         uses: docker/build-push-action@v6
         with:
-          platforms: linux/arm64
+          platforms: linux/arm64/v8
           context: .
           file: tools/image/Dockerfile
           pull: true
