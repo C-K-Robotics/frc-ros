@@ -1,0 +1,25 @@
+# OAKD Cameras Configuration
+/oak_d_lite:
+  ros__parameters:
+    camera:
+      i_nn_type: none
+      i_tf_cam_pos_x: "0.0"
+      i_tf_cam_pos_y: "0.0"
+      i_tf_cam_pos_z: "0.0"
+      i_tf_cam_roll: "0.0"
+      i_tf_cam_pitch: "0.0"
+      i_tf_cam_yaw: "0.0"
+    stereo:
+      i_align_depth: true
+      i_board_socket_id: 2
+      i_subpixel: true
+      i_right_rect_publish_topic: true
+      i_right_rect_synced: false
+# /oak_d_pro_w:
+#   ros__parameters:
+#     camera:
+#       i_mx_id: 1944301051FB4D1300
+#     nn:
+#       i_nn_config_path: depthai_ros_driver/mobilenet
+
+# Other Configuration
