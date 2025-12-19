@@ -51,14 +51,14 @@ apt install -y ros-$ROS_DISTRO-librealsense2*
 
 wget -qO- https://raw.githubusercontent.com/luxonis/depthai-ros/main/install_dependencies.sh | sudo bash
 
-cd /tmp
-git clone https://github.com/Livox-SDK/Livox-SDK2.git
-cd ./Livox-SDK2/
-mkdir build && cd build
-cmake .. && make -j4
-sudo make install
-cd /tmp
-rm -rf Livox-SDK2
+# cd /tmp
+# git clone https://github.com/Livox-SDK/Livox-SDK2.git
+# cd ./Livox-SDK2/
+# mkdir build && cd build
+# cmake .. && make -j4
+# sudo make install
+# cd /tmp
+# rm -rf Livox-SDK2
 
-apt clean
-rm -rf /var/lib/apt/lists/*
+# apt clean
+# rm -rf /var/lib/apt/lists/*
