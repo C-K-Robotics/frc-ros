@@ -66,6 +66,11 @@ RUN --mount=type=ssh \
     DEBIAN_FRONTEND=noninteractive /bin/sh /frc_tmp/${CUSTOM_INSTALL_FILE} && \
     rm -rf /frc_tmp/${CUSTOM_INSTALL_FILE}
 
+COPY tools/image/custom_install_file/custom-installs-allwpilib.sh /frc_tmp/custom-installs-allwpilib.sh
+RUN --mount=type=ssh \
+    DEBIAN_FRONTEND=noninteractive /bin/sh /frc_tmp/custom-installs-allwpilib.sh && \
+    rm -rf /frc_tmp/custom-installs-allwpilib.sh
+
 FROM base_custom as base_ros
 
 ARG ROS_DISTRO
