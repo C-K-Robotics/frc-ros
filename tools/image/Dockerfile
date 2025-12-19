@@ -22,14 +22,14 @@ RUN apt update && DEBIAN_FRONTEND=noninteractive apt -y install --no-install-rec
   && apt clean \
   && rm -rf /var/lib/apt/lists/*
 
-COPY tools/image/${APT_FILE} /frc_tmp/${APT_FILE}
+COPY tools/image/apt_file/${APT_FILE} /frc_tmp/${APT_FILE}
 
 RUN apt update && DEBIAN_FRONTEND=noninteractive apt -y install --no-install-recommends \
         $(cat /frc_tmp/${APT_FILE} | cut -d# -f1) && \
     apt clean && \
     rm -rf /var/lib/apt/lists/* /frc_tmp/${APT_FILE}
 
-COPY tools/image/${APT_GPU_FILE} /frc_tmp/${APT_GPU_FILE}
+COPY tools/image/apt_gpu_file/${APT_GPU_FILE} /frc_tmp/${APT_GPU_FILE}
 RUN apt update && DEBIAN_FRONTEND=noninteractive apt -y install --no-install-recommends \
         $(cat /frc_tmp/${APT_GPU_FILE} | cut -d# -f1) && \
     apt clean && \
@@ -42,15 +42,15 @@ RUN mkdir -p ~/.ssh \
 
 RUN python3 -m pip install --upgrade pip
 
-COPY tools/image/${PIP_FILE} /frc_tmp/${PIP_FILE}
+COPY tools/image/pip_file/${PIP_FILE} /frc_tmp/${PIP_FILE}
 RUN DEBIAN_FRONTEND=noninteractive pip3 install -U --no-cache --ignore-installed -r /frc_tmp/${PIP_FILE} && \
     rm -rf /frc_tmp/${PIP_FILE}
 
-COPY tools/image/${PIP_GPU_FILE} /frc_tmp/${PIP_GPU_FILE}
+COPY tools/image/pip_gpu_file/${PIP_GPU_FILE} /frc_tmp/${PIP_GPU_FILE}
 RUN DEBIAN_FRONTEND=noninteractive pip3 install -U --no-cache --ignore-installed -r /frc_tmp/${PIP_GPU_FILE} && \
     rm -rf /frc_tmp/${PIP_GPU_FILE}
 
-COPY tools/image/${PYTORCH_FILE} /frc_tmp/${PYTORCH_FILE}
+COPY tools/image/pytorch_file/${PYTORCH_FILE} /frc_tmp/${PYTORCH_FILE}
 RUN DEBIAN_FRONTEND=noninteractive pip3 install -U --no-cache --ignore-installed -r /frc_tmp/${PYTORCH_FILE} && \
     rm -rf /frc_tmp/${PYTORCH_FILE}
 
@@ -61,7 +61,7 @@ FROM base as base_custom
 ARG ROS_DISTRO
 ENV ROS_DISTRO=${ROS_DISTRO}
 
-COPY tools/image/${CUSTOM_INSTALL_FILE} /frc_tmp/${CUSTOM_INSTALL_FILE}
+COPY tools/image/custom_install_file/${CUSTOM_INSTALL_FILE} /frc_tmp/${CUSTOM_INSTALL_FILE}
 RUN --mount=type=ssh \
     DEBIAN_FRONTEND=noninteractive /bin/sh /frc_tmp/${CUSTOM_INSTALL_FILE} && \
     rm -rf /frc_tmp/${CUSTOM_INSTALL_FILE}
@@ -72,7 +72,7 @@ ARG ROS_DISTRO
 ARG ROS_INSTALL
 
 # Install Ros Distro
-COPY tools/image/${ROS_INSTALL} /frc_tmp/${ROS_INSTALL}
+COPY tools/image/ros_install/${ROS_INSTALL} /frc_tmp/${ROS_INSTALL}
 RUN DEBIAN_FRONTEND=noninteractive /bin/bash /frc_tmp/${ROS_INSTALL} ${ROS_DISTRO} && \
     rm -rf /frc_tmp/${ROS_INSTALL}
 
@@ -85,7 +85,8 @@ ARG SKIP_KEYS
 
 COPY src/ /workspace/src
 COPY *.repos /workspace
-COPY tools/image/${VCS_IMPORTS_SCRIPT} /workspace/${VCS_IMPORTS_SCRIPT}
+COPY tools/image/vcs_imports_script/${VCS_IMPORTS_SCRIPT} /workspace/${VCS_IMPORTS_SCRIPT}
+COPY tools/image/skip_keys/${SKIP_KEYS} /workspace/${SKIP_KEYS}
 
 RUN --mount=type=ssh \
     source /opt/ros/${ROS_SOURCE}/setup.bash && \
@@ -94,7 +95,7 @@ RUN --mount=type=ssh \
     cd /workspace && \
     rm -rf src/external && \
     DEBIAN_FRONTEND=noninteractive ./${VCS_IMPORTS_SCRIPT} && \
-    DEBIAN_FRONTEND=noninteractive rosdep install --as-root "apt:false pip:false" --simulate --reinstall -r -y --ignore-src --rosdistro ${ROS_DISTRO} --skip-keys ${SKIP_KEYS} --from-paths . | sort >> /ros-deps && \
+    DEBIAN_FRONTEND=noninteractive rosdep install --as-root "apt:false pip:false" --simulate --reinstall -r -y --ignore-src --rosdistro ${ROS_DISTRO} --skip-keys $(cat /workspace/${SKIP_KEYS} | cut -d# -f1) --from-paths . | sort >> /ros-deps && \
     cd / && \
     rm -rf /workspace
 
@@ -121,8 +122,8 @@ ARG EXPORTS_GPU_SCRIPT
 
 ENV ROS_DISTRO=${ROS_DISTRO}
 
-COPY tools/image/${EXPORTS_SCRIPT} /frc_tmp/${EXPORTS_SCRIPT}
-COPY tools/image/${EXPORTS_GPU_SCRIPT} /frc_tmp/${EXPORTS_GPU_SCRIPT}
+COPY tools/image/exports_script/${EXPORTS_SCRIPT} /frc_tmp/${EXPORTS_SCRIPT}
+COPY tools/image/exports_gpu_script/${EXPORTS_GPU_SCRIPT} /frc_tmp/${EXPORTS_GPU_SCRIPT}
 RUN  cd /frc_tmp && \
     ./${EXPORTS_GPU_SCRIPT} && \
     ./${EXPORTS_SCRIPT} && \
@@ -146,7 +147,7 @@ RUN --mount=type=ssh \
     source /opt/ros/${ROS_SOURCE}/setup.bash && \
     cd /opt/frc-ros && \
     rm -rf src/external && \
-    DEBIAN_FRONTEND=noninteractive ./tools/image/${VCS_IMPORTS_SCRIPT} && \
+    DEBIAN_FRONTEND=noninteractive ./tools/image/vcs_imports_script/${VCS_IMPORTS_SCRIPT} && \
     export PATH="/opt/cmake-install/bin:${PATH}" && \
     export CMAKE_PREFIX_PATH="/opt/cmake-install:${CMAKE_PREFIX_PATH}" && \
     export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/usr/local/lib" && \
