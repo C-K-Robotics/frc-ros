@@ -155,21 +155,20 @@ build-docker-cpu-humble-jetpack6:
 		-f tools/image/Dockerfile \
 		--target frc_image_built \
 		--ssh default=${SSH_AUTH_SOCK} \
-		--build-arg BASE_IMAGE=nvcr.io/nvidia/l4t-jetpack:r36.2.0 \
+		--build-arg BASE_IMAGE=nvcr.io/nvidia/l4t-jetpack:r36.4.0 \
 		--build-arg ROS_DISTRO=humble \
 		--build-arg ROS_SOURCE="humble" \
 		--build-arg ROS_INSTALL=ros-install.sh\
 		--build-arg SKIP_KEYS=skip-keys \
 		--build-arg APT_FILE=apt-packages-l4t \
 		--build-arg APT_GPU_FILE=empty-deps \
-		--build-arg PIP_FILE=pip3-packages \
+		--build-arg PIP_FILE=pip3-packages-jetson \
 		--build-arg PIP_GPU_FILE=empty-deps \
 		--build-arg PYTORCH_FILE=pytorch-cpu \
 		--build-arg EXPORTS_SCRIPT=exports.sh \
 		--build-arg EXPORTS_GPU_SCRIPT=empty-script.sh \
 		--build-arg VCS_IMPORTS_SCRIPT=vcs-imports-humble.sh \
 		--build-arg CUSTOM_INSTALL_FILE=custom-installs-l4t.sh \
-		--build-arg OPENCV_SCRIPT=opencv-480-install.sh \
 		-t ${IMG_NAME} .
 
 .PHONY: build-docker-gpu-humble-jetpack5
