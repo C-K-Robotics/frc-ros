@@ -54,6 +54,11 @@ COPY tools/image/pytorch_file/${PYTORCH_FILE} /frc_tmp/${PYTORCH_FILE}
 RUN DEBIAN_FRONTEND=noninteractive pip3 install -U --no-cache --ignore-installed -r /frc_tmp/${PYTORCH_FILE} && \
     rm -rf /frc_tmp/${PYTORCH_FILE}
 
+COPY tools/image/custom_install_file/custom-installs-allwpilib.sh /frc_tmp/custom-installs-allwpilib.sh
+RUN --mount=type=ssh \
+    DEBIAN_FRONTEND=noninteractive /bin/sh /frc_tmp/custom-installs-allwpilib.sh && \
+    rm -rf /frc_tmp/custom-installs-allwpilib.sh
+
 RUN rm -rf /frc_tmp
 
 FROM base as base_custom
@@ -65,11 +70,6 @@ COPY tools/image/custom_install_file/${CUSTOM_INSTALL_FILE} /frc_tmp/${CUSTOM_IN
 RUN --mount=type=ssh \
     DEBIAN_FRONTEND=noninteractive /bin/sh /frc_tmp/${CUSTOM_INSTALL_FILE} && \
     rm -rf /frc_tmp/${CUSTOM_INSTALL_FILE}
-
-COPY tools/image/custom_install_file/custom-installs-allwpilib.sh /frc_tmp/custom-installs-allwpilib.sh
-RUN --mount=type=ssh \
-    DEBIAN_FRONTEND=noninteractive /bin/sh /frc_tmp/custom-installs-allwpilib.sh && \
-    rm -rf /frc_tmp/custom-installs-allwpilib.sh
 
 FROM base_custom as base_ros
 
