@@ -230,10 +230,10 @@ jobs:
         with:
           ref: ${{ github.ref }}
           head_ref: ${{ github.head_ref }}
-      - name: Free Disk Space (Ubuntu)
-        uses: jlumbroso/free-disk-space@v1.3.1
-        with:
-          tool-cache: true
+      # - name: Free Disk Space (Ubuntu)
+      #   uses: jlumbroso/free-disk-space@v1.3.1
+      #   with:
+      #     tool-cache: true
       - name: Cache Docker layers
         uses: actions/cache@v4
         with:
