@@ -164,7 +164,7 @@ build-docker-gpu-humble-jetpack6:
 		--build-arg APT_GPU_FILE=empty-deps \
 		--build-arg PIP_FILE=pip3-packages-l4t \
 		--build-arg PIP_GPU_FILE=empty-deps \
-		--build-arg PYTORCH_FILE=pytorch-l4t \
+		--build-arg PYTORCH_FILE=pytorch-gpu-l4t \
 		--build-arg EXPORTS_SCRIPT=exports-humble.sh \
 		--build-arg EXPORTS_GPU_SCRIPT=exports-gpu-cu128.sh \
 		--build-arg VCS_IMPORTS_SCRIPT=vcs-imports-humble-jetson.sh \

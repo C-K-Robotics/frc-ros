@@ -197,7 +197,7 @@ jobs:
             APT_GPU_FILE: empty-deps
             PIP_FILE: pip3-packages-l4t
             PIP_GPU_FILE: empty-deps
-            PYTORCH_FILE: pytorch-l4t
+            PYTORCH_FILE: pytorch-gpu-l4t
             EXPORTS_SCRIPT: exports-humble.sh
             EXPORTS_GPU_SCRIPT: exports-gpu-cu128.sh
             VCS_IMPORTS_SCRIPT: vcs-imports-humble-jetson.sh
