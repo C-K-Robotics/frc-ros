@@ -1,5 +1,5 @@
 #!/bin/sh
-export OPENCV_VERSION=4.8.0
+export OPENCV_VERSION=4.11.0
 
 mkdir /frc_temp && cd /frc_temp
 wget -O opencv.zip https://github.com/opencv/opencv/archive/$OPENCV_VERSION.zip
@@ -17,14 +17,14 @@ cmake -D CMAKE_BUILD_TYPE=RELEASE \
     -D OPENCV_EXTRA_MODULES_PATH=/frc_temp/opencv_contrib-${OPENCV_VERSION}/modules \
     -D EIGEN_INCLUDE_PATH=/usr/include/eigen3 \
     -D WITH_OPENCL=OFF \
-    -D WITH_CUDA=OFF \
-    -D CUDA_ARCH_BIN=5.0 \
-    -D CUDA_ARCH_PTX="" \
-    -D WITH_CUDNN=OFF \
-    -D WITH_CUBLAS=OFF \
+    -D WITH_CUDA=ON \
+    -D CUDA_ARCH_BIN=8.7 \
+    -D CUDA_ARCH_PTX="sm_87" \
+    -D WITH_CUDNN=ON \
+    -D WITH_CUBLAS=ON \
     -D ENABLE_FAST_MATH=ON \
-    -D CUDA_FAST_MATH=OFF \
-    -D OPENCV_DNN_CUDA=OFF \
+    -D CUDA_FAST_MATH=ON \
+    -D OPENCV_DNN_CUDA=ON \
     -D ENABLE_NEON=ON \
     -D WITH_QT=OFF \
     -D WITH_OPENMP=ON \
