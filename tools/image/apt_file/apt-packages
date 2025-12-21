@@ -56,3 +56,6 @@ python3-flake8
 
 # Github actions
 zstd
+
+# X11 headers
+xorg-dev
