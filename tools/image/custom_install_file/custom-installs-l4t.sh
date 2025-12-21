@@ -1,7 +1,7 @@
 #!/bin/sh
 export OPENCV_VERSION=4.8.0
 
-mkdir /art_temp && cd /art_temp
+mkdir /frc_temp && cd /frc_temp
 wget -O opencv.zip https://github.com/opencv/opencv/archive/$OPENCV_VERSION.zip
 unzip opencv.zip
 rm opencv.zip
@@ -9,12 +9,12 @@ wget -O opencv_contrib.zip https://github.com/opencv/opencv_contrib/archive/$OPE
 unzip opencv_contrib.zip
 rm opencv_contrib.zip
 
-mkdir /art_temp/opencv-$OPENCV_VERSION/build
-cd /art_temp/opencv-$OPENCV_VERSION/build
+mkdir /frc_temp/opencv-$OPENCV_VERSION/build
+cd /frc_temp/opencv-$OPENCV_VERSION/build
 
 cmake -D CMAKE_BUILD_TYPE=RELEASE \
     -D CMAKE_INSTALL_PREFIX=/usr/local \
-    -D OPENCV_EXTRA_MODULES_PATH=/art_temp/opencv_contrib-${OPENCV_VERSION}/modules \
+    -D OPENCV_EXTRA_MODULES_PATH=/frc_temp/opencv_contrib-${OPENCV_VERSION}/modules \
     -D EIGEN_INCLUDE_PATH=/usr/include/eigen3 \
     -D WITH_OPENCL=OFF \
     -D WITH_CUDA=OFF \
@@ -48,7 +48,7 @@ cmake -D CMAKE_BUILD_TYPE=RELEASE \
 make -j4
 make install
 ldconfig
-cd / && rm -rf /art_temp
+cd / && rm -rf /frc_temp
 
 
 apt update
@@ -58,8 +58,8 @@ cd osqp
 mkdir build
 cd build
 cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr/local ..
-cmake --build .
-cmake --build . --target install
+cmake --build . -j6
+cmake --build . --target install -j6
 cd ../..
 rm -rf osqp
 
@@ -68,9 +68,31 @@ apt install -y gcc g++ gfortran git cmake liblapack-dev pkg-config --install-rec
 apt install -y --no-install-recommends coinor-libipopt-dev libslicot-dev
 cd /opt && git clone https://github.com/casadi/casadi.git -b 3.6.4
 cd casadi && mkdir build && cd build
-cmake -DCMAKE_BUILD_TYPE=Release -DWITH_IPOPT=ON -DWITH_SLICOT=ON -DWITH_LAPACK=ON -DWITH_QPOASES=ON -DWITH_OSQP=ON .. && make -j$(nproc)
-make install
+cmake -DCMAKE_BUILD_TYPE=Release -DWITH_IPOPT=ON -DWITH_SLICOT=ON -DWITH_LAPACK=ON -DWITH_QPOASES=ON -DWITH_OSQP=ON .. && make -j8
+make install -j6
 cd /opt && rm -rf casadi
+
+apt install -y cargo llvm-dev libclang-dev
+cd /opt && git clone -b 0.11.0-dev-87-g6aa7bcb https://github.com/eclipse-zenoh/zenoh-plugin-ros2dds.git
+cd zenoh-plugin-ros2dds
+cargo build --release
+mv target/release/zenoh-bridge-ros2dds /usr/local/bin/
+mv target/release/libzenoh_plugin_ros2dds.so /usr/local/lib/
+cd ../
+rm -rf zenoh-plugin-ros2dds
+
+apt install -y ros-$ROS_DISTRO-librealsense2*
+
+wget -qO- https://raw.githubusercontent.com/luxonis/depthai-ros/main/install_dependencies.sh | sudo bash
+
+# cd /tmp
+# git clone https://github.com/Livox-SDK/Livox-SDK2.git
+# cd ./Livox-SDK2/
+# mkdir build && cd build
+# cmake .. && make -j4
+# sudo make install
+# cd /tmp
+# rm -rf Livox-SDK2
 
 apt clean
 rm -rf /var/lib/apt/lists/*

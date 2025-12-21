@@ -50,6 +50,14 @@ libpcl-dev
 libomp-dev
 libcgal-dev
 libglm-dev
+libhdf5-serial-dev
+hdf5-tools
+libhdf5-dev
+zlib1g-dev
+libjpeg8-dev
+liblapack-dev
+libblas-dev
+gfortran
 
 # Python Style
 python3-flake8

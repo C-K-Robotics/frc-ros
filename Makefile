@@ -134,72 +134,10 @@ build-docker-cpu-humble:
 		--build-arg PIP_FILE=pip3-packages \
 		--build-arg PIP_GPU_FILE=empty-deps \
 		--build-arg PYTORCH_FILE=pytorch-cpu \
-		--build-arg EXPORTS_SCRIPT=exports.sh \
+		--build-arg EXPORTS_SCRIPT=exports-humble.sh \
 		--build-arg EXPORTS_GPU_SCRIPT=empty-script.sh \
 		--build-arg VCS_IMPORTS_SCRIPT=vcs-imports-humble.sh \
 		--build-arg CUSTOM_INSTALL_FILE=custom-installs.sh \
-		-t ${IMG_NAME} .
-
-.PHONY: build-docker-cpu-humble-jetpack6
-build-docker-cpu-humble-jetpack6:
-	@IMG_NAME=${IMG_NAME}
-	@SSH_FILE_PATH=${SSH_FILE_PATH}
-	eval $(ssh-agent)
-	if [ -z "$${SSH_FILE_PATH}" ] ; then
-		ssh-add ~/.ssh/id_ed25519
-	else
-		ssh-add ${SSH_FILE_PATH}
-	fi
-	DOCKER_BUILDKIT=1 docker build \
-		--network=host \
-		-f tools/image/Dockerfile \
-		--target frc_image_built \
-		--ssh default=${SSH_AUTH_SOCK} \
-		--build-arg BASE_IMAGE=nvcr.io/nvidia/l4t-jetpack:r36.4.0 \
-		--build-arg ROS_DISTRO=humble \
-		--build-arg ROS_SOURCE="humble" \
-		--build-arg ROS_INSTALL=ros-install.sh\
-		--build-arg SKIP_KEYS=skip-keys \
-		--build-arg APT_FILE=apt-packages-l4t \
-		--build-arg APT_GPU_FILE=empty-deps \
-		--build-arg PIP_FILE=pip3-packages-jetson \
-		--build-arg PIP_GPU_FILE=empty-deps \
-		--build-arg PYTORCH_FILE=pytorch-cpu \
-		--build-arg EXPORTS_SCRIPT=exports.sh \
-		--build-arg EXPORTS_GPU_SCRIPT=empty-script.sh \
-		--build-arg VCS_IMPORTS_SCRIPT=vcs-imports-humble.sh \
-		--build-arg CUSTOM_INSTALL_FILE=custom-installs-l4t.sh \
-		-t ${IMG_NAME} .
-
-.PHONY: build-docker-gpu-humble-jetpack5
-build-docker-gpu-humble-jetpack5:
-	@IMG_NAME=${IMG_NAME}
-	@SSH_FILE_PATH=${SSH_FILE_PATH}
-	eval $(ssh-agent)
-	if [ -z "$${SSH_FILE_PATH}" ] ; then
-		ssh-add ~/.ssh/id_ed25519
-	else
-		ssh-add ${SSH_FILE_PATH}
-	fi
-	DOCKER_BUILDKIT=1 docker build \
-		--network=host \
-		-f tools/image/Dockerfile \
-		--target frc_image \
-		--ssh default=${SSH_AUTH_SOCK} \
-		--build-arg BASE_IMAGE=dustynv/ros:humble-pytorch-l4t-r35.3.1 \
-		--build-arg ROS_DISTRO=humble \
-		--build-arg ROS_SOURCE="humble/install" \
-		--build-arg ROS_INSTALL=ros-jetson-install.sh \
-		--build-arg SKIP_KEYS=skip-keys \
-		--build-arg APT_FILE=apt-packages-jetson \
-		--build-arg APT_GPU_FILE=empty-deps \
-		--build-arg PIP_FILE=pip3-packages-jetson \
-		--build-arg PIP_GPU_FILE=pip3-packages-jetson-gpu \
-		--build-arg PYTORCH_FILE=pytorch-gpu-jetson \
-		--build-arg EXPORTS_SCRIPT=exports-jetson.sh \
-		--build-arg EXPORTS_GPU_SCRIPT=empty-script.sh \
-		--build-arg VCS_IMPORTS_SCRIPT=vcs-imports-humble-jetson.sh \
-		--build-arg CUSTOM_INSTALL_FILE=custom-installs-jetson.sh \
 		-t ${IMG_NAME} .
 
 .PHONY: build-docker-gpu-humble-jetpack6
@@ -217,20 +155,20 @@ build-docker-gpu-humble-jetpack6:
 		-f tools/image/Dockerfile \
 		--target frc_image \
 		--ssh default=${SSH_AUTH_SOCK} \
-		--build-arg BASE_IMAGE=dustynv/tensorrt:8.6-r36.2.0 \
+		--build-arg BASE_IMAGE=nvcr.io/nvidia/l4t-jetpack:r36.4.0 \
 		--build-arg ROS_DISTRO=humble \
 		--build-arg ROS_SOURCE="humble" \
 		--build-arg ROS_INSTALL=ros-install.sh\
 		--build-arg SKIP_KEYS=skip-keys \
 		--build-arg APT_FILE=apt-packages-l4t \
 		--build-arg APT_GPU_FILE=empty-deps \
-		--build-arg PIP_FILE=pip3-packages \
+		--build-arg PIP_FILE=pip3-packages-l4t \
 		--build-arg PIP_GPU_FILE=empty-deps \
-		--build-arg PYTORCH_FILE=empty-deps \
-		--build-arg EXPORTS_SCRIPT=exports.sh \
-		--build-arg EXPORTS_GPU_SCRIPT=exports-gpu-cu122.sh \
-		--build-arg VCS_IMPORTS_SCRIPT=vcs-imports-humble.sh \
-		--build-arg CUSTOM_INSTALL_FILE=custom-installs-jp6.sh \
+		--build-arg PYTORCH_FILE=pytorch-l4t \
+		--build-arg EXPORTS_SCRIPT=exports-humble.sh \
+		--build-arg EXPORTS_GPU_SCRIPT=exports-gpu-cu128.sh \
+		--build-arg VCS_IMPORTS_SCRIPT=vcs-imports-humble-jetson.sh \
+		--build-arg CUSTOM_INSTALL_FILE=custom-installs-l4t.sh \
 		-t ${IMG_NAME} .
 
 .PHONY: build-docker-cu122-humble
@@ -289,7 +227,7 @@ build-docker-cu118-humble:
 		--build-arg PIP_FILE=pip3-packages \
 		--build-arg PIP_GPU_FILE=pip3-packages-gpu-cu118 \
 		--build-arg PYTORCH_FILE=pytorch-gpu-cu118 \
-		--build-arg EXPORTS_SCRIPT=exports.sh \
+		--build-arg EXPORTS_SCRIPT=exports-humble.sh \
 		--build-arg EXPORTS_GPU_SCRIPT=exports-gpu-cu118.sh \
 		--build-arg VCS_IMPORTS_SCRIPT=vcs-imports-humble.sh \
 		--build-arg CUSTOM_INSTALL_FILE=custom-installs.sh \
@@ -320,11 +258,15 @@ build-docker-cu122-humble:
 		--build-arg PIP_FILE=pip3-packages \
 		--build-arg PIP_GPU_FILE=pip3-packages-gpu-cu122 \
 		--build-arg PYTORCH_FILE=pytorch-gpu-cu122 \
-		--build-arg EXPORTS_SCRIPT=exports.sh \
+		--build-arg EXPORTS_SCRIPT=exports-humble.sh \
 		--build-arg EXPORTS_GPU_SCRIPT=exports-gpu-cu122.sh \
 		--build-arg VCS_IMPORTS_SCRIPT=vcs-imports-humble.sh \
 		--build-arg CUSTOM_INSTALL_FILE=custom-installs.sh \
 		-t ${IMG_NAME} .
+
+.PHONY: docker-cache-clean
+docker-cache-clean:
+	docker builder prune --all --force
 
 # -----------------------------------------------------------------------------
 # Target: build-perception

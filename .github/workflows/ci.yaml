@@ -33,7 +33,7 @@ jobs:
             PIP_FILE: pip3-packages
             PIP_GPU_FILE: empty-deps
             PYTORCH_FILE: pytorch-cpu
-            EXPORTS_SCRIPT: exports.sh
+            EXPORTS_SCRIPT: exports-humble.sh
             EXPORTS_GPU_SCRIPT: empty-script.sh
             VCS_IMPORTS_SCRIPT: vcs-imports-humble.sh
             CUSTOM_INSTALL_FILE: custom-installs.sh
@@ -187,21 +187,21 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - SAVE_NAME: frc_ros_humble_cpu
-            BASE_IMAGE: arm64v8/ubuntu:22.04
+          - SAVE_NAME: frc_ros_humble_gpu_jetpack6
+            BASE_IMAGE: nvcr.io/nvidia/l4t-jetpack:r36.4.0
             ROS_DISTRO: humble
             ROS_SOURCE: humble
             ROS_INSTALL: ros-install.sh
             SKIP_KEYS: skip-keys
-            APT_FILE: apt-packages-jetson
+            APT_FILE: apt-packages-l4t
             APT_GPU_FILE: empty-deps
-            PIP_FILE: pip3-packages-jetson
+            PIP_FILE: pip3-packages-l4t
             PIP_GPU_FILE: empty-deps
-            PYTORCH_FILE: pytorch-cpu
-            EXPORTS_SCRIPT: exports-jetson.sh
-            EXPORTS_GPU_SCRIPT: empty-script.sh
+            PYTORCH_FILE: pytorch-l4t
+            EXPORTS_SCRIPT: exports-humble.sh
+            EXPORTS_GPU_SCRIPT: exports-gpu-cu128.sh
             VCS_IMPORTS_SCRIPT: vcs-imports-humble-jetson.sh
-            CUSTOM_INSTALL_FILE: custom-installs.sh
+            CUSTOM_INSTALL_FILE: custom-installs-l4t.sh
     outputs:
       image_name: ${{ steps.save_image_name.outputs.image_name }}
       cache_name: ${{ steps.save_image_name.outputs.cache_name }}
