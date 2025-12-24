@@ -4,6 +4,7 @@ echo export PATH="${PATH:+:${PATH}}/usr/local/lib/python3.10/dist-packages" >> /
 echo "source /opt/ros/${ROS_SOURCE}/setup.bash" >> /etc/bash.bashrc
 echo export "RMW_IMPLEMENTATION=rmw_cyclonedds_cpp" >> /etc/bash.bashrc
 echo export "CYCLONEDDS_URI=file:///etc/cyclone/cyclonedds.xml" >> /etc/bash.bashrc
+echo export "CYCLONEDDS_NETWORK_INTERFACE_ADDRESS=localhost" >> /etc/bash.bashrc
 echo export "CYCLONE_INCLUDE=/opt/ros/${ROS_SOURCE}/include" >> /etc/bash.bashrc
 echo export "CYCLONE_LIB=/opt/ros/${ROS_SOURCE}/lib/" >> /etc/bash.bashrc
 echo export "ROS_AUTOMATIC_DISCOVERY_RANGE=LOCALHOST" >> /etc/bash.bashrc

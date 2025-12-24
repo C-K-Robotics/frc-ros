@@ -3,7 +3,8 @@
     <Domain id="any">
         <General>
             <Interfaces>
-                <NetworkInterface name="lo" multicast="true" />
+                <!-- <NetworkInterface name="${CYCLONEDDS_NETWORK_INTERFACE}" multicast="true" /> -->
+                <NetworkInterface address="${CYCLONEDDS_NETWORK_INTERFACE_ADDRESS}" multicast="true" />
             </Interfaces>
             <AllowMulticast>default</AllowMulticast>
             <MaxMessageSize>65500B</MaxMessageSize>
