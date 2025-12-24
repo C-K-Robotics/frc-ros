@@ -7,7 +7,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-ic"]
 
 COPY build/ /opt/frc-ros/build
 COPY install/ /opt/frc-ros/install
-COPY example.env /opt/frc-ros/race.env
+COPY example.env /opt/frc-ros/robot.env
 COPY tools/ /opt/frc-ros/tools
 
 RUN echo "source /opt/frc-ros/install/setup.bash" >> /etc/bash.bashrc

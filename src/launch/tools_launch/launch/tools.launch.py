@@ -8,7 +8,7 @@ import os
 from environs import Env
 
 env = Env()
-env.read_env("stack.env")
+env.read_env("robot.env")
 
 launch_dir = get_package_share_directory("tools_launch")
 gc_dir = get_package_share_directory("ghost_car")

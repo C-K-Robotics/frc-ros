@@ -12,7 +12,7 @@ from launch.conditions import IfCondition
 
 # Load environment variables
 env = Env()
-env.read_env("stack.env")
+env.read_env("robot.env")
 
 # Create launch argument to determine if we should launch perception
 launch_perception = DeclareLaunchArgument(

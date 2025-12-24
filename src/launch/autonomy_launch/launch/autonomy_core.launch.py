@@ -23,7 +23,7 @@ import os
 from environs import Env
 
 env = Env()
-env.read_env("stack.env")
+env.read_env("robot.env")
 
 launch_dir = get_package_share_directory("autonomy_launch")
 foxglove_dir = get_package_share_directory("foxglove_bridge")

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 cd ${FRC_ROS_DIR}
-source stack.env
+source robot.env
 if [ "${RUNTIME}" = "nvidia" ]; then
     echo "RUNTIME is set to nvidia"
 else

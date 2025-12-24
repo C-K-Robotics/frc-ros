@@ -9,7 +9,7 @@ from base_common import get_share_file
 from environs import Env
 
 env = Env()
-env.read_env("stack.env")
+env.read_env("robot.env")
 
 if env.str("ROBOT_NAME") == "KIT_BOT" or env.str("ROBOT_NAME") == "IAC_CAR":
     robot_name_arg = DeclareLaunchArgument(

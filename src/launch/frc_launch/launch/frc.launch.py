@@ -14,7 +14,7 @@ from environs import Env
 uuids = json.load(open("install/frc_launch/share/frc_launch/param/uuids.json", "r"))
 
 env = Env()
-env.read_env("stack.env")
+env.read_env("robot.env")
 
 launch_dir = get_package_share_directory("frc_launch")
 nt_bridge_dir = get_package_share_directory("networktable_bridge")

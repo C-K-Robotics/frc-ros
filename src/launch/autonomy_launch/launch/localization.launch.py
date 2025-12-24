@@ -12,7 +12,7 @@ from base_common import check_val_in_list
 
 def generate_launch_description():
     env = Env()
-    env.read_env("stack.env")
+    env.read_env("robot.env")
     race_type_arg = DeclareLaunchArgument(
         "race_type",
         default_value=TextSubstitution(text=env.str("RACE_TYPE")),
