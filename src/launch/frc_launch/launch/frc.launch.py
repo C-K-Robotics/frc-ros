@@ -3,7 +3,7 @@ from launch import LaunchDescription
 from launch.conditions import IfCondition
 from launch.substitutions import LaunchConfiguration, TextSubstitution
 from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription
-from launch_ros.actions import Node
+from launch_ros.actions import Node, LifecycleNode
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 import os
 import json
@@ -17,7 +17,7 @@ env = Env()
 env.read_env("robot.env")
 
 launch_dir = get_package_share_directory("frc_launch")
-nt_bridge_dir = get_package_share_directory("networktable_bridge")
+nt_bridge_dir = get_package_share_directory("networktables_bridge")
 sensor_dir = get_package_share_directory("sensor_launch")
 
 launch_ntb = DeclareLaunchArgument(
@@ -36,10 +36,11 @@ robot_name_arg = DeclareLaunchArgument(
     description="Which Robot to use",
 )
 
-ntb_node = Node(
-    package="networktable_bridge",
-    executable="nt_client_sub_node",
-    name="ntb_sub_all",
+ntb_node = LifecycleNode(
+    package="networktables_bridge",
+    executable="nt_bridge_node",
+    name="nt_bridge",
+    namespace="",
     output="screen",
     parameters=[
         {"NT_server_ip": env.str("ROBOT_IP")},
@@ -47,6 +48,16 @@ ntb_node = Node(
         {"automated": True},
     ],
     condition=IfCondition(LaunchConfiguration("launch_ntb")),
+)
+
+lifecycle_manager_node = Node(
+    package='nav2_lifecycle_manager',
+    executable='lifecycle_manager',
+    name='lifecycle_manager',
+    output='screen',
+    parameters=[{'use_sim_time': False},
+                {'autostart': True},
+                {'node_names': ['nt_bridge']}]
 )
 
 frc_config = (
@@ -120,6 +131,8 @@ def generate_launch_description():
 
     # Include components conditionally
     ld.add_action(ntb_node)
+
+    ld.add_action(lifecycle_manager_node)
 
     # Include sensors
     for launch in sensors_launch:

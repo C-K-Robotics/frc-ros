@@ -22,9 +22,9 @@ repositories:
         url: git@github.com:BehaviorTree/Groot.git
         version: master
     # NetworkTable Bridge
-    src/external/interfaces/networktable_bridge:
+    src/external/interfaces/networktables_bridge:
         type: git
-        url: git@github.com:C-K-Robotics/networktable_bridge.git
+        url: git@github.com:C-K-Robotics/networktables_bridge.git
         version: main
     # pcl utils
     src/external/pcl/utils/pointcloud_to_laserscan:

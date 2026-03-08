@@ -11,10 +11,15 @@
   <buildtool_depend>ament_cmake_auto</buildtool_depend>
 
   <depend>rclcpp</depend>
+  <depend>rclcpp_lifecycle</depend>
+  <depend>lifecycle_msgs</depend>
+
   <exec_depend>environs</exec_depend>
   <exec_depend>common_metadata</exec_depend>
   <exec_depend>base_common</exec_depend>
   <exec_depend>sensor_launch</exec_depend>
+  <exec_depend>networktables_bridge</exec_depend>
+  <exec_depend>nav2_lifecycle_manager</exec_depend>
 
   <test_depend>ament_lint_auto</test_depend>
   <test_depend>ament_lint_common</test_depend>
