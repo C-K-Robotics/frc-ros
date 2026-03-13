@@ -1,6 +1,6 @@
 # Visualization utilities
 pandas
-numpy
+numpy==1.26.4
 seaborn
 matplotlib
 packaging

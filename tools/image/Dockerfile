@@ -43,18 +43,20 @@ RUN mkdir -p ~/.ssh \
 RUN python3 -m pip install --upgrade pip
 
 COPY tools/image/pip_file/${PIP_FILE} /frc_tmp/${PIP_FILE}
-RUN DEBIAN_FRONTEND=noninteractive pip3 install -U --no-cache --ignore-installed -r /frc_tmp/${PIP_FILE} && \
-    rm -rf /frc_tmp/${PIP_FILE}
-
 COPY tools/image/pip_gpu_file/${PIP_GPU_FILE} /frc_tmp/${PIP_GPU_FILE}
-RUN DEBIAN_FRONTEND=noninteractive pip3 install -U --no-cache --ignore-installed -r /frc_tmp/${PIP_GPU_FILE} && \
-    rm -rf /frc_tmp/${PIP_GPU_FILE}
-
 COPY tools/image/pytorch_file/${PYTORCH_FILE} /frc_tmp/${PYTORCH_FILE}
-RUN DEBIAN_FRONTEND=noninteractive pip3 install -U --no-cache --ignore-installed -r /frc_tmp/${PYTORCH_FILE} && \
-    rm -rf /frc_tmp/${PYTORCH_FILE}
-
-RUN rm -rf /frc_tmp
+RUN --mount=type=cache,target=/root/.cache/pip \
+    set -euo pipefail; \
+    if [ -s "/frc_tmp/${PIP_FILE}" ]; then \
+      PIP_DISABLE_PIP_VERSION_CHECK=1 pip3 install -U --no-cache-dir -r /frc_tmp/${PIP_FILE} --break-system-packages; \
+    fi; \
+    if [ -s "/frc_tmp/${PIP_GPU_FILE}" ]; then \
+      PIP_DISABLE_PIP_VERSION_CHECK=1 pip3 install -U --no-cache-dir -r /frc_tmp/${PIP_GPU_FILE} --break-system-packages; \
+    fi; \
+    if [ -s "/frc_tmp/${PYTORCH_FILE}" ]; then \
+      PIP_DISABLE_PIP_VERSION_CHECK=1 pip3 install -U --no-cache-dir -r /frc_tmp/${PYTORCH_FILE} --break-system-packages; \
+    fi; \
+    rm -rf /frc_tmp
 
 FROM base as base_custom
 

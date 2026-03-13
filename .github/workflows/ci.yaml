@@ -199,7 +199,7 @@ jobs:
             PIP_GPU_FILE: empty-deps
             PYTORCH_FILE: pytorch-gpu-l4t
             EXPORTS_SCRIPT: exports-humble.sh
-            EXPORTS_GPU_SCRIPT: exports-gpu-cu128.sh
+            EXPORTS_GPU_SCRIPT: exports-gpu-cu126.sh
             VCS_IMPORTS_SCRIPT: vcs-imports-humble-jetson.sh
             CUSTOM_INSTALL_FILE: custom-installs-l4t.sh
     outputs:

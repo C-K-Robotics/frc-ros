@@ -1,3 +1,4 @@
---extra-index-url https://pypi.jetson-ai-lab.io/jp6/cu128/+f/f8b/bd758e3ca0567/torch-2.6.0-cp310-cp310-linux_aarch64.whl#sha256=f8bbd758e3ca05675e825bf7e230e7f7e01202b8f75fcd27f9720e78753387ed
---extra-index-url https://pypi.jetson-ai-lab.io/jp6/cu128/+f/6d1/cd994a035d91f/torchvision-0.21.0-cp310-cp310-linux_aarch64.whl#sha256=6d1cd994a035d91facb8da7e4b4fe908f105301de48ac1ff93573dc81cfb877a
-#--extra-index-url https://pypi.jetson-ai-lab.io/jp6/cu129/+f/05e/01070bbc68ec7/torchaudio-2.9.0-cp310-cp310-linux_aarch64.whl#sha256=05e01070bbc68ec70c74c0b93ca54da0b2fa0a17ab65518f9a3f23de1a54366b
+--extra-index-url https://pypi.jetson-ai-lab.io/jp6/cu126/+f/37d/7e156cfb4a646/torch-2.10.0-cp310-cp310-linux_aarch64.whl#sha256=37d7e156cfb4a646c4d7347597727db1529d184108f703324dfff1842cec094e
+--extra-index-url https://pypi.jetson-ai-lab.io/jp6/cu126/+f/1b6/357c5532db61e/torchvision-0.25.0-cp310-cp310-linux_aarch64.whl#sha256=1b6357c5532db61e9bfe7ad69f73ba73e8214010de021da703d360d2cc16c3d7
+--extra-index-url https://pypi.jetson-ai-lab.io/jp6/cu126/+f/692/6eb2c403d4e0e/torchaudio-2.10.0-cp310-cp310-linux_aarch64.whl#sha256=6926eb2c403d4e0ed7585c3a4f2d5c69f3ddb91d040ed85bb6e88d9b339e4087
+--extra-index-url https://pypi.jetson-ai-lab.io/jp6/cu126/+f/854/fe6d63a2a7526/torch_tensorrt-2.8.0+cu126-cp310-cp310-linux_aarch64.whl#sha256=854fe6d63a2a75266cf89df5ba6f1dcbe3a6716ed52db86c541fe7483f4199c1

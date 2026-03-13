@@ -10,7 +10,6 @@
   <depend>rclpy</depend>
   <depend>tf2_ros_py</depend>
 
-  <depend>python3-numpy</depend>
   <depend>std_msgs</depend>
   <depend>geometry_msgs</depend>
   <depend>ackermann_msgs</depend>

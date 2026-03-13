@@ -1,9 +1,4 @@
 #!/bin/sh
-wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/arm64/cuda-keyring_1.1-1_all.deb
-dpkg -i cuda-keyring_1.1-1_all.deb
-apt update
-apt -y install cuda-toolkit-12-8 cuda-compat-12-8
-
 export OPENCV_VERSION=4.11.0
 
 mkdir /frc_temp && cd /frc_temp
