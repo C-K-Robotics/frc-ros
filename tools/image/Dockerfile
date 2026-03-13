@@ -132,6 +132,7 @@ ENV ROS_DISTRO=${ROS_DISTRO}
 COPY tools/image/exports_script/${EXPORTS_SCRIPT} /frc_tmp/${EXPORTS_SCRIPT}
 COPY tools/image/exports_gpu_script/${EXPORTS_GPU_SCRIPT} /frc_tmp/${EXPORTS_GPU_SCRIPT}
 RUN  cd /frc_tmp && \
+    chmod +x ./${EXPORTS_GPU_SCRIPT} ./${EXPORTS_SCRIPT} && \
     ./${EXPORTS_GPU_SCRIPT} && \
     ./${EXPORTS_SCRIPT} && \
     rm -rf /frc_tmp/

@@ -2,3 +2,7 @@
 --extra-index-url https://pypi.jetson-ai-lab.io/jp6/cu126/+f/1b6/357c5532db61e/torchvision-0.25.0-cp310-cp310-linux_aarch64.whl#sha256=1b6357c5532db61e9bfe7ad69f73ba73e8214010de021da703d360d2cc16c3d7
 --extra-index-url https://pypi.jetson-ai-lab.io/jp6/cu126/+f/692/6eb2c403d4e0e/torchaudio-2.10.0-cp310-cp310-linux_aarch64.whl#sha256=6926eb2c403d4e0ed7585c3a4f2d5c69f3ddb91d040ed85bb6e88d9b339e4087
 --extra-index-url https://pypi.jetson-ai-lab.io/jp6/cu126/+f/854/fe6d63a2a7526/torch_tensorrt-2.8.0+cu126-cp310-cp310-linux_aarch64.whl#sha256=854fe6d63a2a75266cf89df5ba6f1dcbe3a6716ed52db86c541fe7483f4199c1
+torch
+torchvision
+torchaudio
+torch-tensorrt
