@@ -1,0 +1,23 @@
+session_name: Vison
+windows:
+  - window_name: NT-Bridge
+    layout: tiled
+    panes:
+      - shell_command:
+          - cd /opt/frc-ros
+          - source tools/scripts/source_all.sh
+          - ros2 launch networktables_bridge nt_bridge.launch.py nt_server_ip:=10.80.20.2
+      - shell_command:
+          - cd /opt/frc-ros
+          - source tools/scripts/source_all.sh
+          - sleep 5
+          - ros2 lifecycle set /nt_bridge_node configure
+          - ros2 lifecycle set /nt_bridge_node activate
+
+  - window_name: Object-Detection
+    layout: tiled
+    panes:
+      - shell_command:
+          - cd /opt/frc-ros
+          - source tools/scripts/source_all.sh
+          - ros2 launch frc_object_detection_ros2 robot_vision_launch.py
