@@ -33,6 +33,7 @@ jobs:
             PIP_FILE: pip3-packages
             PIP_GPU_FILE: empty-deps
             PYTORCH_FILE: pytorch-cpu
+            PIP_NO_DEPS_FILE: pip3-packages-no-deps
             EXPORTS_SCRIPT: exports-humble.sh
             EXPORTS_GPU_SCRIPT: empty-script.sh
             VCS_IMPORTS_SCRIPT: vcs-imports-humble.sh
@@ -103,6 +104,7 @@ jobs:
             PIP_FILE=${{ matrix.PIP_FILE }}
             PIP_GPU_FILE=${{ matrix.PIP_GPU_FILE }}
             PYTORCH_FILE=${{ matrix.PYTORCH_FILE }}
+            PIP_NO_DEPS_FILE=${{ matrix.PIP_NO_DEPS_FILE }}
             EXPORTS_SCRIPT=${{ matrix.EXPORTS_SCRIPT }}
             EXPORTS_GPU_SCRIPT=${{ matrix.EXPORTS_GPU_SCRIPT }}
             VCS_IMPORTS_SCRIPT=${{ matrix.VCS_IMPORTS_SCRIPT }}
@@ -198,6 +200,7 @@ jobs:
             PIP_FILE: pip3-packages-l4t
             PIP_GPU_FILE: empty-deps
             PYTORCH_FILE: pytorch-gpu-l4t
+            PIP_NO_DEPS_FILE: pip3-packages-no-deps
             EXPORTS_SCRIPT: exports-humble.sh
             EXPORTS_GPU_SCRIPT: exports-gpu-cu126.sh
             VCS_IMPORTS_SCRIPT: vcs-imports-humble-jetson.sh
@@ -268,6 +271,7 @@ jobs:
             PIP_FILE=${{ matrix.PIP_FILE }}
             PIP_GPU_FILE=${{ matrix.PIP_GPU_FILE }}
             PYTORCH_FILE=${{ matrix.PYTORCH_FILE }}
+            PIP_NO_DEPS_FILE=${{ matrix.PIP_NO_DEPS_FILE }}
             EXPORTS_SCRIPT=${{ matrix.EXPORTS_SCRIPT }}
             EXPORTS_GPU_SCRIPT=${{ matrix.EXPORTS_GPU_SCRIPT }}
             VCS_IMPORTS_SCRIPT=${{ matrix.VCS_IMPORTS_SCRIPT }}

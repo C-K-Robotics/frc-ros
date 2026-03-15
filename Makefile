@@ -134,6 +134,7 @@ build-docker-cpu-humble:
 		--build-arg PIP_FILE=pip3-packages \
 		--build-arg PIP_GPU_FILE=empty-deps \
 		--build-arg PYTORCH_FILE=pytorch-cpu \
+		--build-arg PIP_NO_DEPS_FILE=pip3-packages-no-deps \
 		--build-arg EXPORTS_SCRIPT=exports-humble.sh \
 		--build-arg EXPORTS_GPU_SCRIPT=empty-script.sh \
 		--build-arg VCS_IMPORTS_SCRIPT=vcs-imports-humble.sh \
@@ -165,41 +166,11 @@ build-docker-gpu-humble-jetpack6:
 		--build-arg PIP_FILE=pip3-packages-l4t \
 		--build-arg PIP_GPU_FILE=empty-deps \
 		--build-arg PYTORCH_FILE=pytorch-gpu-l4t \
+		--build-arg PIP_NO_DEPS_FILE=pip3-packages-no-deps \
 		--build-arg EXPORTS_SCRIPT=exports-humble.sh \
 		--build-arg EXPORTS_GPU_SCRIPT=exports-gpu-cu126.sh \
 		--build-arg VCS_IMPORTS_SCRIPT=vcs-imports-humble-jetson.sh \
 		--build-arg CUSTOM_INSTALL_FILE=custom-installs-l4t.sh \
-		-t ${IMG_NAME} .
-
-.PHONY: build-docker-cu122-humble
-build-docker-cu122-humble:
-	@IMG_NAME=${IMG_NAME}
-	@SSH_FILE_PATH=${SSH_FILE_PATH}
-	eval $(ssh-agent)
-	if [ -z "$${SSH_FILE_PATH}" ] ; then
-		ssh-add ~/.ssh/id_ed25519
-	else
-		ssh-add ${SSH_FILE_PATH}
-	fi
-	DOCKER_BUILDKIT=1 docker build \
-		--network=host \
-		-f tools/image/Dockerfile \
-		--target frc_image \
-		--ssh default=${SSH_AUTH_SOCK} \
-		--build-arg BASE_IMAGE=nvidia/cuda:12.2.2-devel-ubuntu22.04 \
-		--build-arg ROS_DISTRO=humble \
-		--build-arg ROS_SOURCE=humble \
-		--build-arg ROS_INSTALL=ros-install.sh \
-		--build-arg SKIP_KEYS=skip-keys \
-		--build-arg APT_FILE=apt-packages \
-		--build-arg APT_GPU_FILE=apt-packages-gpu-cu122 \
-		--build-arg PIP_FILE=pip3-packages \
-		--build-arg PIP_GPU_FILE=pip3-packages-gpu-cu122 \
-		--build-arg PYTORCH_FILE=pytorch-gpu-cu122 \
-		--build-arg EXPORTS_SCRIPT=exports-humble.sh \
-		--build-arg EXPORTS_GPU_SCRIPT=exports-gpu-cu122.sh \
-		--build-arg VCS_IMPORTS_SCRIPT=vcs-imports-humble.sh \
-		--build-arg CUSTOM_INSTALL_FILE=custom-installs.sh \
 		-t ${IMG_NAME} .
 
 .PHONY: build-docker-cu118-humble
@@ -227,6 +198,7 @@ build-docker-cu118-humble:
 		--build-arg PIP_FILE=pip3-packages \
 		--build-arg PIP_GPU_FILE=pip3-packages-gpu-cu118 \
 		--build-arg PYTORCH_FILE=pytorch-gpu-cu118 \
+		--build-arg PIP_NO_DEPS_FILE=pip3-packages-no-deps \
 		--build-arg EXPORTS_SCRIPT=exports-humble.sh \
 		--build-arg EXPORTS_GPU_SCRIPT=exports-gpu-cu118.sh \
 		--build-arg VCS_IMPORTS_SCRIPT=vcs-imports-humble.sh \
@@ -258,6 +230,7 @@ build-docker-cu122-humble:
 		--build-arg PIP_FILE=pip3-packages \
 		--build-arg PIP_GPU_FILE=pip3-packages-gpu-cu122 \
 		--build-arg PYTORCH_FILE=pytorch-gpu-cu122 \
+		--build-arg PIP_NO_DEPS_FILE=pip3-packages-no-deps \
 		--build-arg EXPORTS_SCRIPT=exports-humble.sh \
 		--build-arg EXPORTS_GPU_SCRIPT=exports-gpu-cu122.sh \
 		--build-arg VCS_IMPORTS_SCRIPT=vcs-imports-humble.sh \

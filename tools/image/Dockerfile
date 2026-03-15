@@ -9,6 +9,7 @@ ARG APT_GPU_FILE
 ARG PIP_FILE
 ARG PIP_GPU_FILE
 ARG PYTORCH_FILE
+ARG PIP_NO_DEPS_FILE
 ARG CUSTOM_INSTALL_FILE
 
 ## Install apt packages
@@ -55,6 +56,9 @@ RUN --mount=type=cache,target=/root/.cache/pip \
     fi; \
     if [ -s "/frc_tmp/${PYTORCH_FILE}" ]; then \
       PIP_DISABLE_PIP_VERSION_CHECK=1 pip3 install -U --no-cache-dir -r /frc_tmp/${PYTORCH_FILE} --break-system-packages; \
+    fi; \
+    if [ -s "/frc_tmp/${PIP_NO_DEPS_FILE}" ]; then \
+      PIP_DISABLE_PIP_VERSION_CHECK=1 pip3 install -U --no-cache-dir --no-deps -r /frc_tmp/${PIP_NO_DEPS_FILE} --break-system-packages; \
     fi; \
     rm -rf /frc_tmp
 
