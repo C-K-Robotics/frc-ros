@@ -46,6 +46,7 @@ RUN python3 -m pip install --upgrade pip
 COPY tools/image/pip_file/${PIP_FILE} /frc_tmp/${PIP_FILE}
 COPY tools/image/pip_gpu_file/${PIP_GPU_FILE} /frc_tmp/${PIP_GPU_FILE}
 COPY tools/image/pytorch_file/${PYTORCH_FILE} /frc_tmp/${PYTORCH_FILE}
+COPY tools/image/pip_no_deps_file/${PIP_NO_DEPS_FILE} /frc_tmp/${PIP_NO_DEPS_FILE}
 RUN --mount=type=cache,target=/root/.cache/pip \
     set -euo pipefail; \
     if [ -s "/frc_tmp/${PIP_FILE}" ]; then \
