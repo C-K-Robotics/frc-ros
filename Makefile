@@ -373,6 +373,7 @@ session:
 			-e NVIDIA_DRIVER_CAPABILITIES=all \
 			-e DISPLAY=${DISPLAY} \
 			-v /dev/bus/usb:/dev/bus/usb \
+			-v /dev/camera:/dev/camera \
 			--device-cgroup-rule='c 189:* rmw' \
 			--device /dev/video0 \
 			--volume='/dev/input:/dev/input' \
@@ -390,6 +391,7 @@ session:
 			--net=host \
 			-e DISPLAY=${DISPLAY} \
 			-v /dev/bus/usb:/dev/bus/usb \
+			-v /dev/camera:/dev/camera \
 			--device-cgroup-rule='c 189:* rmw' \
 			--device /dev/video0 \
 			--volume='/dev/input:/dev/input' \
