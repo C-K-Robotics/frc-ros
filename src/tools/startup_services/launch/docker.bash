@@ -8,4 +8,4 @@ else
     echo "RUNTIME is set to docker"
 fi
 #make session IMG_NAME=ubuntu:latest
-make session RUNTIME=nvidia IMG_NAME=ghcr.io/c-k-robotics/frc_ros_humble_gpu_jetpack6:stable
+make session RUNTIME=nvidia IMG_NAME=ghcr.io/c-k-robotics/frc_ros_humble_gpu_jetpack6:stable ENTRYPOINT=/opt/frc-ros/src/tools/startup_services/launch/launch_tmuxp.sh
